@@ -14,6 +14,8 @@
 		19C7FF8A28DC58BC00374BBD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19C7FF8828DC58BC00374BBD /* Main.storyboard */; };
 		19C7FF8C28DC58BF00374BBD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19C7FF8B28DC58BF00374BBD /* Assets.xcassets */; };
 		19C7FF8F28DC58BF00374BBD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19C7FF8D28DC58BF00374BBD /* LaunchScreen.storyboard */; };
+		19E3B6E828E5738D00928689 /* YS Display-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 19E3B6E628E5738C00928689 /* YS Display-Bold.ttf */; };
+		19E3B6E928E5738D00928689 /* YS Display-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 19E3B6E728E5738D00928689 /* YS Display-Medium.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		19C7FF8B28DC58BF00374BBD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		19C7FF8E28DC58BF00374BBD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		19C7FF9028DC58BF00374BBD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		19E3B6E628E5738C00928689 /* YS Display-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YS Display-Bold.ttf"; sourceTree = "<group>"; };
+		19E3B6E728E5738D00928689 /* YS Display-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YS Display-Medium.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +47,8 @@
 			isa = PBXGroup;
 			children = (
 				19C7FF8B28DC58BF00374BBD /* Assets.xcassets */,
+				19E3B6E628E5738C00928689 /* YS Display-Bold.ttf */,
+				19E3B6E728E5738D00928689 /* YS Display-Medium.ttf */,
 				19C7FF8D28DC58BF00374BBD /* LaunchScreen.storyboard */,
 				19C7FF9028DC58BF00374BBD /* Info.plist */,
 			);
@@ -155,6 +161,8 @@
 				19C7FF8F28DC58BF00374BBD /* LaunchScreen.storyboard in Resources */,
 				19C7FF8C28DC58BF00374BBD /* Assets.xcassets in Resources */,
 				19C7FF8A28DC58BC00374BBD /* Main.storyboard in Resources */,
+				19E3B6E828E5738D00928689 /* YS Display-Bold.ttf in Resources */,
+				19E3B6E928E5738D00928689 /* YS Display-Medium.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
