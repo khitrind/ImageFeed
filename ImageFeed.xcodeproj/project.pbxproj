@@ -7,23 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		19C76ACE28E43CFE0080A069 /* ImagesListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C76ACD28E43CFE0080A069 /* ImagesListCell.swift */; };
 		19C7FF8328DC58BC00374BBD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C7FF8228DC58BC00374BBD /* AppDelegate.swift */; };
 		19C7FF8528DC58BC00374BBD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C7FF8428DC58BC00374BBD /* SceneDelegate.swift */; };
-		19C7FF8728DC58BC00374BBD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C7FF8628DC58BC00374BBD /* ViewController.swift */; };
+		19C7FF8728DC58BC00374BBD /* ImagesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C7FF8628DC58BC00374BBD /* ImagesListViewController.swift */; };
 		19C7FF8A28DC58BC00374BBD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19C7FF8828DC58BC00374BBD /* Main.storyboard */; };
 		19C7FF8C28DC58BF00374BBD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19C7FF8B28DC58BF00374BBD /* Assets.xcassets */; };
 		19C7FF8F28DC58BF00374BBD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19C7FF8D28DC58BF00374BBD /* LaunchScreen.storyboard */; };
+		19E3B6E828E5738D00928689 /* YS Display-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 19E3B6E628E5738C00928689 /* YS Display-Bold.ttf */; };
+		19E3B6E928E5738D00928689 /* YS Display-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 19E3B6E728E5738D00928689 /* YS Display-Medium.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		19C76ACD28E43CFE0080A069 /* ImagesListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListCell.swift; sourceTree = "<group>"; };
 		19C7FF7F28DC58BC00374BBD /* ImageFeed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageFeed.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		19C7FF8228DC58BC00374BBD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		19C7FF8428DC58BC00374BBD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		19C7FF8628DC58BC00374BBD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		19C7FF8628DC58BC00374BBD /* ImagesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListViewController.swift; sourceTree = "<group>"; };
 		19C7FF8928DC58BC00374BBD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		19C7FF8B28DC58BF00374BBD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		19C7FF8E28DC58BF00374BBD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		19C7FF9028DC58BF00374BBD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		19E3B6E628E5738C00928689 /* YS Display-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YS Display-Bold.ttf"; sourceTree = "<group>"; };
+		19E3B6E728E5738D00928689 /* YS Display-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YS Display-Medium.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,6 +43,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1987CCBC28E4293E00102561 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				19C7FF8B28DC58BF00374BBD /* Assets.xcassets */,
+				19E3B6E628E5738C00928689 /* YS Display-Bold.ttf */,
+				19E3B6E728E5738D00928689 /* YS Display-Medium.ttf */,
+				19C7FF8D28DC58BF00374BBD /* LaunchScreen.storyboard */,
+				19C7FF9028DC58BF00374BBD /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		1987CCE828E429EE00102561 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				19C7FF8828DC58BC00374BBD /* Main.storyboard */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		19C76ACF28E43D1A0080A069 /* ImageList */ = {
+			isa = PBXGroup;
+			children = (
+				19C7FF8628DC58BC00374BBD /* ImagesListViewController.swift */,
+				19C76ACD28E43CFE0080A069 /* ImagesListCell.swift */,
+			);
+			path = ImageList;
+			sourceTree = "<group>";
+		};
 		19C7FF7628DC58BC00374BBD = {
 			isa = PBXGroup;
 			children = (
@@ -58,11 +93,9 @@
 			children = (
 				19C7FF8228DC58BC00374BBD /* AppDelegate.swift */,
 				19C7FF8428DC58BC00374BBD /* SceneDelegate.swift */,
-				19C7FF8628DC58BC00374BBD /* ViewController.swift */,
-				19C7FF8828DC58BC00374BBD /* Main.storyboard */,
-				19C7FF8B28DC58BF00374BBD /* Assets.xcassets */,
-				19C7FF8D28DC58BF00374BBD /* LaunchScreen.storyboard */,
-				19C7FF9028DC58BF00374BBD /* Info.plist */,
+				19C76ACF28E43D1A0080A069 /* ImageList */,
+				1987CCE828E429EE00102561 /* Presentation */,
+				1987CCBC28E4293E00102561 /* Resources */,
 			);
 			path = ImageFeed;
 			sourceTree = "<group>";
@@ -128,6 +161,8 @@
 				19C7FF8F28DC58BF00374BBD /* LaunchScreen.storyboard in Resources */,
 				19C7FF8C28DC58BF00374BBD /* Assets.xcassets in Resources */,
 				19C7FF8A28DC58BC00374BBD /* Main.storyboard in Resources */,
+				19E3B6E828E5738D00928689 /* YS Display-Bold.ttf in Resources */,
+				19E3B6E928E5738D00928689 /* YS Display-Medium.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,7 +173,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				19C7FF8728DC58BC00374BBD /* ViewController.swift in Sources */,
+				19C7FF8728DC58BC00374BBD /* ImagesListViewController.swift in Sources */,
+				19C76ACE28E43CFE0080A069 /* ImagesListCell.swift in Sources */,
 				19C7FF8328DC58BC00374BBD /* AppDelegate.swift in Sources */,
 				19C7FF8528DC58BC00374BBD /* SceneDelegate.swift in Sources */,
 			);
@@ -289,7 +325,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 275UNJTZR3;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = ImageFeed/Info.plist;
+				INFOPLIST_FILE = ImageFeed/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -319,7 +355,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 275UNJTZR3;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = ImageFeed/Info.plist;
+				INFOPLIST_FILE = ImageFeed/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

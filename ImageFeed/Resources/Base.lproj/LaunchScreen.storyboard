@@ -21,7 +21,7 @@
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" red="0.10196078431372549" green="0.10588235294117647" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="tJL-F7-1wD" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="8lG-WI-w7U"/>
                             <constraint firstItem="tJL-F7-1wD" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="Dlq-yh-3dw"/>
