@@ -32,8 +32,8 @@
                         </tabBarAppearance>
                     </tabBar>
                     <connections>
-                        <segue destination="j4i-6H-T4u" kind="relationship" relationship="viewControllers" id="iGx-NK-mkV"/>
-                        <segue destination="Osj-ak-n0z" kind="relationship" relationship="viewControllers" id="Q63-bB-lF6"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="pcI-ay-A9T"/>
+                        <segue destination="Osj-ak-n0z" kind="relationship" relationship="viewControllers" id="v86-5P-X8N"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HSZ-6y-zUd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -59,17 +59,6 @@
                                             <rect key="frame" x="0.0" y="0.0" width="430" height="215"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="27 Августа 2022" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tbB-o4-f3d" userLabel="Date Label">
-                                                    <rect key="frame" x="28.000000000000007" y="183" width="79.666666666666686" height="13"/>
-                                                    <fontDescription key="fontDescription" name="YSDisplay-Medium" family="YS Display" pointSize="11"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iQf-DP-B31" userLabel="Like Button">
-                                                    <rect key="frame" x="332" y="12" width="72" height="56"/>
-                                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                    <state key="normal" image="like_button_on"/>
-                                                </button>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="KvV-Rk-0BY" userLabel="Cell Image">
                                                     <rect key="frame" x="20" y="11" width="390" height="193"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -82,6 +71,17 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="27 Августа 2022" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tbB-o4-f3d" userLabel="Date Label">
+                                                    <rect key="frame" x="28.000000000000007" y="183" width="79.666666666666686" height="13"/>
+                                                    <fontDescription key="fontDescription" name="YSDisplay-Medium" family="YS Display" pointSize="11"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iQf-DP-B31" userLabel="Like Button">
+                                                    <rect key="frame" x="332" y="12" width="72" height="56"/>
+                                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                    <state key="normal" image="like_button_on"/>
+                                                </button>
                                             </subviews>
                                             <color key="backgroundColor" name="black"/>
                                             <constraints>
@@ -118,15 +118,16 @@
                             <constraint firstAttribute="top" secondItem="dp2-fv-U9H" secondAttribute="top" id="Xir-a3-FQT"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="" image="tab_editorial_active" id="Yfc-T7-yAK"/>
                     <navigationItem key="navigationItem" id="StL-Rj-r6E"/>
                     <connections>
                         <outlet property="tableView" destination="dp2-fv-U9H" id="Po3-Pp-G95"/>
-                        <segue destination="eRP-tQ-d1R" kind="show" identifier="ShowSingleImageView" id="QPF-Gh-Ghx"/>
+                        <segue destination="eRP-tQ-d1R" kind="presentation" identifier="ShowSingleImageView" id="QPF-Gh-Ghx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="972.55813953488371" y="-556.22317596566529"/>
+            <point key="canvasLocation" x="201" y="-375"/>
         </scene>
         <!--Profile-->
         <scene sceneID="V6C-lh-x3c">
@@ -212,40 +213,16 @@
             </objects>
             <point key="canvasLocation" x="201" y="420"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="8Tp-uj-vcs">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="j4i-6H-T4u" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="tab_editorial_active" id="D8H-4h-G2A"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="12U-k7-bfb">
-                        <rect key="frame" x="0.0" y="59" width="430" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <navigationBarAppearance key="standardAppearance">
-                            <color key="backgroundColor" name="black"/>
-                        </navigationBarAppearance>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="5DG-KC-xYR"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="SLw-eW-DAz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="73.95348837209302" y="-556.22317596566529"/>
-        </scene>
         <!--Single Image View Controller-->
         <scene sceneID="ZQR-lx-3mD">
             <objects>
                 <viewController id="eRP-tQ-d1R" customClass="SingleImageViewController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="EtT-qd-Sfk">
-                        <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
+                        <rect key="frame" x="0.0" y="0.0" width="430" height="863"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="h7w-Zw-Nhh">
-                                <rect key="frame" x="0.0" y="103" width="430" height="746"/>
+                                <rect key="frame" x="0.0" y="59" width="430" height="804"/>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="8Ab-G7-vQM"/>
@@ -264,7 +241,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gj0-tF-AvJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1817" y="-556"/>
+            <point key="canvasLocation" x="1133" y="-375"/>
         </scene>
     </scenes>
     <resources>
