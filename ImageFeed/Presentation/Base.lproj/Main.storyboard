@@ -72,8 +72,8 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="27 Августа 2022" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tbB-o4-f3d" userLabel="Date Label">
-                                                    <rect key="frame" x="28.000000000000007" y="183" width="79.666666666666686" height="13"/>
-                                                    <fontDescription key="fontDescription" name="YSDisplay-Medium" family="YS Display" pointSize="11"/>
+                                                    <rect key="frame" x="27.999999999999993" y="180.66666666666666" width="98.333333333333314" height="15.333333333333343"/>
+                                                    <fontDescription key="fontDescription" name="YSDisplay-Medium" family="YS Display" pointSize="13"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -89,7 +89,6 @@
                                                 <constraint firstItem="KvV-Rk-0BY" firstAttribute="top" secondItem="dRu-Rv-j6N" secondAttribute="topMargin" id="AsN-gU-kmd"/>
                                                 <constraint firstItem="KvV-Rk-0BY" firstAttribute="trailing" secondItem="iQf-DP-B31" secondAttribute="trailing" id="CqT-UR-CWE"/>
                                                 <constraint firstItem="iQf-DP-B31" firstAttribute="top" secondItem="KvV-Rk-0BY" secondAttribute="top" id="HwD-kb-YTj"/>
-                                                <constraint firstItem="KvV-Rk-0BY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="tbB-o4-f3d" secondAttribute="trailing" constant="-8" id="VgY-W3-Fb3"/>
                                                 <constraint firstItem="KvV-Rk-0BY" firstAttribute="leading" secondItem="dRu-Rv-j6N" secondAttribute="leadingMargin" id="dvu-8H-tJq"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="KvV-Rk-0BY" secondAttribute="bottom" id="fzj-rh-sDs"/>
                                                 <constraint firstItem="tbB-o4-f3d" firstAttribute="leading" secondItem="KvV-Rk-0BY" secondAttribute="leading" constant="8" id="tzs-7r-qBE"/>
