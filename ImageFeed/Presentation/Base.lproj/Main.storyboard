@@ -72,7 +72,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="27 Августа 2022" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tbB-o4-f3d" userLabel="Date Label">
-                                                    <rect key="frame" x="27.999999999999993" y="180.66666666666666" width="98.333333333333314" height="15.333333333333343"/>
+                                                    <rect key="frame" x="28" y="180.66666666666666" width="94" height="15.333333333333343"/>
                                                     <fontDescription key="fontDescription" name="YSDisplay-Medium" family="YS Display" pointSize="13"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -220,9 +220,33 @@
                         <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="h7w-Zw-Nhh" userLabel="Image View">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rqg-L5-4un">
                                 <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
-                            </imageView>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="h7w-Zw-Nhh" userLabel="Image View">
+                                        <rect key="frame" x="0.0" y="0.0" width="430" height="417"/>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uUd-fg-PS6">
+                                        <rect key="frame" x="190" y="812" width="50" height="50"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" image="share_button"/>
+                                        <connections>
+                                            <action selector="didClickShareButtom" destination="eRP-tQ-d1R" eventType="touchUpInside" id="S5B-wa-xAq"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="h7w-Zw-Nhh" secondAttribute="trailing" id="VhH-g1-WaF"/>
+                                    <constraint firstItem="h7w-Zw-Nhh" firstAttribute="top" secondItem="rqg-L5-4un" secondAttribute="top" id="eP0-fg-YWx"/>
+                                    <constraint firstItem="h7w-Zw-Nhh" firstAttribute="leading" secondItem="rqg-L5-4un" secondAttribute="leading" id="nko-Oh-NFX"/>
+                                    <constraint firstAttribute="bottom" secondItem="h7w-Zw-Nhh" secondAttribute="bottom" id="y21-Aa-9k7"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="fNs-to-mw2"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="rXt-Dp-fr5"/>
+                                <connections>
+                                    <outlet property="delegate" destination="eRP-tQ-d1R" id="Cee-Ru-f8F"/>
+                                </connections>
+                            </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ehq-ex-ja6">
                                 <rect key="frame" x="8" y="67" width="24" height="24"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -235,16 +259,19 @@
                         <viewLayoutGuide key="safeArea" id="8Ab-G7-vQM"/>
                         <color key="backgroundColor" name="black"/>
                         <constraints>
-                            <constraint firstItem="h7w-Zw-Nhh" firstAttribute="top" secondItem="EtT-qd-Sfk" secondAttribute="top" id="8VS-7m-rG1"/>
                             <constraint firstItem="Ehq-ex-ja6" firstAttribute="top" secondItem="8Ab-G7-vQM" secondAttribute="top" constant="8" id="9oL-K8-u7P"/>
-                            <constraint firstAttribute="bottom" secondItem="h7w-Zw-Nhh" secondAttribute="bottom" id="cPP-1J-RbB"/>
-                            <constraint firstItem="h7w-Zw-Nhh" firstAttribute="leading" secondItem="EtT-qd-Sfk" secondAttribute="leading" id="db5-b3-8oI"/>
-                            <constraint firstAttribute="trailing" secondItem="h7w-Zw-Nhh" secondAttribute="trailing" id="eW1-I0-Xhw"/>
+                            <constraint firstItem="8Ab-G7-vQM" firstAttribute="bottom" secondItem="uUd-fg-PS6" secondAttribute="bottom" constant="36" id="Bau-M6-wqy"/>
+                            <constraint firstItem="uUd-fg-PS6" firstAttribute="centerX" secondItem="8Ab-G7-vQM" secondAttribute="centerX" id="Fts-gr-Kjs"/>
+                            <constraint firstItem="rqg-L5-4un" firstAttribute="trailing" secondItem="EtT-qd-Sfk" secondAttribute="trailing" id="LUh-lz-4iZ"/>
+                            <constraint firstAttribute="bottom" secondItem="rqg-L5-4un" secondAttribute="bottom" id="XG3-z9-Wtp"/>
+                            <constraint firstItem="rqg-L5-4un" firstAttribute="top" secondItem="EtT-qd-Sfk" secondAttribute="top" id="mlk-mx-ISa"/>
+                            <constraint firstAttribute="leading" secondItem="rqg-L5-4un" secondAttribute="leading" id="vCJ-mf-sef"/>
                             <constraint firstItem="Ehq-ex-ja6" firstAttribute="leading" secondItem="8Ab-G7-vQM" secondAttribute="leading" constant="8" id="x53-xO-zKL"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="EGF-s9-l39"/>
                     <connections>
+                        <outlet property="scrollView" destination="rqg-L5-4un" id="Xe3-dD-AND"/>
                         <outlet property="singleImage" destination="h7w-Zw-Nhh" id="gb6-os-2rD"/>
                     </connections>
                 </viewController>
@@ -258,6 +285,7 @@
         <image name="exit_profile_button" width="26.666666030883789" height="29.333333969116211"/>
         <image name="like_button_on" width="42" height="42"/>
         <image name="nav_back_button_white" width="24" height="24"/>
+        <image name="share_button" width="50" height="50"/>
         <image name="tab_editorial_active" width="30" height="30"/>
         <image name="tab_profile_active" width="24" height="24"/>
         <image name="user_pick" width="210" height="210"/>
