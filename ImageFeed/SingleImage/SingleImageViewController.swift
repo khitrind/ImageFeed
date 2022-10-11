@@ -67,6 +67,12 @@ class SingleImageViewController: UIViewController {
 	}
 }
 
+
+// Привет, вы не могли бы посоветовать какой-нибудь литературы про работу с картинками в IOS?
+// Заранее спасибо за ответ, интересен аспект как верстать интерфейсы в которых возможно изображения,
+// не известного заранее размера.
+// + к сожалению так и не понял, что делать с картинкой внутри scrollView, в примерах из теории,
+// она так же не растягивается на весь экран...
 extension SingleImageViewController: UIScrollViewDelegate {
 	func viewForZooming(in scrollView: UIScrollView) -> UIView? {
 		singleImage

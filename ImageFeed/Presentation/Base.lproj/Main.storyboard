@@ -223,17 +223,9 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rqg-L5-4un">
                                 <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="h7w-Zw-Nhh" userLabel="Image View">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="430" placeholderIntrinsicHeight="417" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="h7w-Zw-Nhh" userLabel="Image View">
                                         <rect key="frame" x="0.0" y="0.0" width="430" height="417"/>
                                     </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uUd-fg-PS6">
-                                        <rect key="frame" x="190" y="812" width="50" height="50"/>
-                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" image="share_button"/>
-                                        <connections>
-                                            <action selector="didClickShareButtom" destination="eRP-tQ-d1R" eventType="touchUpInside" id="S5B-wa-xAq"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="h7w-Zw-Nhh" secondAttribute="trailing" id="VhH-g1-WaF"/>
@@ -255,15 +247,23 @@
                                     <action selector="didTapBackButton" destination="eRP-tQ-d1R" eventType="touchUpInside" id="LSq-Kl-AYC"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uUd-fg-PS6">
+                                <rect key="frame" x="190" y="812" width="50" height="50"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="share_button"/>
+                                <connections>
+                                    <action selector="didClickShareButtom" destination="eRP-tQ-d1R" eventType="touchUpInside" id="S5B-wa-xAq"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="8Ab-G7-vQM"/>
                         <color key="backgroundColor" name="black"/>
                         <constraints>
                             <constraint firstItem="Ehq-ex-ja6" firstAttribute="top" secondItem="8Ab-G7-vQM" secondAttribute="top" constant="8" id="9oL-K8-u7P"/>
-                            <constraint firstItem="8Ab-G7-vQM" firstAttribute="bottom" secondItem="uUd-fg-PS6" secondAttribute="bottom" constant="36" id="Bau-M6-wqy"/>
-                            <constraint firstItem="uUd-fg-PS6" firstAttribute="centerX" secondItem="8Ab-G7-vQM" secondAttribute="centerX" id="Fts-gr-Kjs"/>
                             <constraint firstItem="rqg-L5-4un" firstAttribute="trailing" secondItem="EtT-qd-Sfk" secondAttribute="trailing" id="LUh-lz-4iZ"/>
+                            <constraint firstItem="uUd-fg-PS6" firstAttribute="centerX" secondItem="8Ab-G7-vQM" secondAttribute="centerX" id="WA7-Tx-RHg"/>
                             <constraint firstAttribute="bottom" secondItem="rqg-L5-4un" secondAttribute="bottom" id="XG3-z9-Wtp"/>
+                            <constraint firstItem="8Ab-G7-vQM" firstAttribute="bottom" secondItem="uUd-fg-PS6" secondAttribute="bottom" constant="36" id="iRg-IH-Kr8"/>
                             <constraint firstItem="rqg-L5-4un" firstAttribute="top" secondItem="EtT-qd-Sfk" secondAttribute="top" id="mlk-mx-ISa"/>
                             <constraint firstAttribute="leading" secondItem="rqg-L5-4un" secondAttribute="leading" id="vCJ-mf-sef"/>
                             <constraint firstItem="Ehq-ex-ja6" firstAttribute="leading" secondItem="8Ab-G7-vQM" secondAttribute="leading" constant="8" id="x53-xO-zKL"/>
