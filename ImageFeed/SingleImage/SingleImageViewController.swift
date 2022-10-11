@@ -15,6 +15,9 @@ class SingleImageViewController: UIViewController {
 		}
 	}
 
+	@IBAction func didTapBackButton() {
+		dismiss(animated: true)
+	}
 
 	@IBOutlet weak var singleImage: UIImageView!
 

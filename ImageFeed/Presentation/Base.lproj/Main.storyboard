@@ -216,22 +216,32 @@
         <!--Single Image View Controller-->
         <scene sceneID="ZQR-lx-3mD">
             <objects>
-                <viewController id="eRP-tQ-d1R" customClass="SingleImageViewController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="eRP-tQ-d1R" customClass="SingleImageViewController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="EtT-qd-Sfk">
-                        <rect key="frame" x="0.0" y="0.0" width="430" height="863"/>
+                        <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="h7w-Zw-Nhh">
-                                <rect key="frame" x="0.0" y="59" width="430" height="804"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="h7w-Zw-Nhh" userLabel="Image View">
+                                <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ehq-ex-ja6">
+                                <rect key="frame" x="8" y="67" width="48" height="38"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="nav_back_button_white"/>
+                                <connections>
+                                    <action selector="didTapBackButton" destination="eRP-tQ-d1R" eventType="touchUpInside" id="LSq-Kl-AYC"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="8Ab-G7-vQM"/>
                         <color key="backgroundColor" name="black"/>
                         <constraints>
-                            <constraint firstItem="h7w-Zw-Nhh" firstAttribute="top" secondItem="8Ab-G7-vQM" secondAttribute="top" id="8VS-7m-rG1"/>
-                            <constraint firstItem="8Ab-G7-vQM" firstAttribute="bottom" secondItem="h7w-Zw-Nhh" secondAttribute="bottom" id="Zkc-jO-l8l"/>
-                            <constraint firstItem="h7w-Zw-Nhh" firstAttribute="leading" secondItem="8Ab-G7-vQM" secondAttribute="leading" id="db5-b3-8oI"/>
-                            <constraint firstItem="8Ab-G7-vQM" firstAttribute="trailing" secondItem="h7w-Zw-Nhh" secondAttribute="trailing" id="eW1-I0-Xhw"/>
+                            <constraint firstItem="h7w-Zw-Nhh" firstAttribute="top" secondItem="EtT-qd-Sfk" secondAttribute="top" id="8VS-7m-rG1"/>
+                            <constraint firstItem="Ehq-ex-ja6" firstAttribute="top" secondItem="8Ab-G7-vQM" secondAttribute="top" constant="8" id="9oL-K8-u7P"/>
+                            <constraint firstAttribute="bottom" secondItem="h7w-Zw-Nhh" secondAttribute="bottom" id="cPP-1J-RbB"/>
+                            <constraint firstItem="h7w-Zw-Nhh" firstAttribute="leading" secondItem="EtT-qd-Sfk" secondAttribute="leading" id="db5-b3-8oI"/>
+                            <constraint firstAttribute="trailing" secondItem="h7w-Zw-Nhh" secondAttribute="trailing" id="eW1-I0-Xhw"/>
+                            <constraint firstItem="Ehq-ex-ja6" firstAttribute="leading" secondItem="8Ab-G7-vQM" secondAttribute="leading" constant="8" id="x53-xO-zKL"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="EGF-s9-l39"/>
@@ -241,13 +251,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gj0-tF-AvJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1133" y="-375"/>
+            <point key="canvasLocation" x="1131.6279069767443" y="-375.32188841201719"/>
         </scene>
     </scenes>
     <resources>
         <image name="0" width="200" height="132"/>
         <image name="exit_profile_button" width="26.666666030883789" height="29.333333969116211"/>
         <image name="like_button_on" width="42" height="42"/>
+        <image name="nav_back_button_white" width="24" height="24"/>
         <image name="tab_editorial_active" width="30" height="30"/>
         <image name="tab_profile_active" width="24" height="24"/>
         <image name="user_pick" width="210" height="210"/>
