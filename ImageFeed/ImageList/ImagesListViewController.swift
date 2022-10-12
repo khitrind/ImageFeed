@@ -8,7 +8,7 @@
 import UIKit
 
 class ImagesListViewController: UIViewController {
-	private let singleViewIdentifire = "ShowSingleImageView"
+	private let singleViewIdentifier = "ShowSingleImageView"
 
 	private var photosName = Array(0..<20).map{ "\($0)" }
 
@@ -34,7 +34,7 @@ class ImagesListViewController: UIViewController {
 	}
 
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		if segue.identifier == singleViewIdentifire {
+		if segue.identifier == singleViewIdentifier {
 			let viewController = segue.destination as! SingleImageViewController
 			let indexPath = sender as! IndexPath
 			let image = UIImage(named: photosName[indexPath.row])
@@ -64,7 +64,7 @@ extension ImagesListViewController: UITableViewDataSource {
 
 extension ImagesListViewController: UITableViewDelegate {
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		performSegue(withIdentifier: singleViewIdentifire, sender: indexPath)
+		performSegue(withIdentifier: singleViewIdentifier, sender: indexPath)
 	}
 }
 
