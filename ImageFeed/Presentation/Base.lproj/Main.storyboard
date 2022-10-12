@@ -223,18 +223,29 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rqg-L5-4un">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rqg-L5-4un">
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="430" placeholderIntrinsicHeight="417" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="h7w-Zw-Nhh" userLabel="Image View">
-                                        <rect key="frame" x="0.0" y="0.0" width="430" height="417"/>
-                                    </imageView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8W8-vO-ps5">
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="430" placeholderIntrinsicHeight="417" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="h7w-Zw-Nhh" userLabel="Image View">
+                                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                                            </imageView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="h7w-Zw-Nhh" secondAttribute="trailing" id="90X-dC-wJn"/>
+                                            <constraint firstItem="h7w-Zw-Nhh" firstAttribute="leading" secondItem="8W8-vO-ps5" secondAttribute="leading" id="RTE-yQ-k8h"/>
+                                            <constraint firstAttribute="bottom" secondItem="h7w-Zw-Nhh" secondAttribute="bottom" id="SJw-Nr-8JD"/>
+                                            <constraint firstItem="h7w-Zw-Nhh" firstAttribute="top" secondItem="8W8-vO-ps5" secondAttribute="top" id="ugD-Ed-5CN"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="h7w-Zw-Nhh" secondAttribute="trailing" id="VhH-g1-WaF"/>
-                                    <constraint firstItem="h7w-Zw-Nhh" firstAttribute="top" secondItem="rqg-L5-4un" secondAttribute="top" id="eP0-fg-YWx"/>
-                                    <constraint firstItem="h7w-Zw-Nhh" firstAttribute="leading" secondItem="rqg-L5-4un" secondAttribute="leading" id="nko-Oh-NFX"/>
-                                    <constraint firstAttribute="bottom" secondItem="h7w-Zw-Nhh" secondAttribute="bottom" id="y21-Aa-9k7"/>
+                                    <constraint firstItem="rXt-Dp-fr5" firstAttribute="bottom" secondItem="8W8-vO-ps5" secondAttribute="bottom" id="LV2-7P-M8O"/>
+                                    <constraint firstItem="8W8-vO-ps5" firstAttribute="leading" secondItem="rXt-Dp-fr5" secondAttribute="leading" id="NRX-zn-4Ki"/>
+                                    <constraint firstItem="rXt-Dp-fr5" firstAttribute="trailing" secondItem="8W8-vO-ps5" secondAttribute="trailing" id="WdZ-Bc-BJc"/>
+                                    <constraint firstItem="8W8-vO-ps5" firstAttribute="top" secondItem="rXt-Dp-fr5" secondAttribute="top" id="t09-oc-23a"/>
                                 </constraints>
                                 <viewLayoutGuide key="contentLayoutGuide" id="fNs-to-mw2"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="rXt-Dp-fr5"/>
