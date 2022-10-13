@@ -10,7 +10,7 @@ import UIKit
 class ImagesListViewController: UIViewController {
 	private let singleViewIdentifier = "ShowSingleImageView"
 
-	private var photosName = Array(0..<20).map{ "\($0)" }
+	private var photosName = Array(0..<24).map{ "\($0)" }
 
 	private lazy var dateFormatter: DateFormatter = {
 		let formatter = DateFormatter()

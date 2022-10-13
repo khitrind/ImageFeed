@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		196656BC28F7EA660097356B /* YS Text-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 196656BB28F7EA660097356B /* YS Text-Regular.ttf */; };
 		19C76ACE28E43CFE0080A069 /* ImagesListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C76ACD28E43CFE0080A069 /* ImagesListCell.swift */; };
 		19C7FF8328DC58BC00374BBD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C7FF8228DC58BC00374BBD /* AppDelegate.swift */; };
 		19C7FF8528DC58BC00374BBD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C7FF8428DC58BC00374BBD /* SceneDelegate.swift */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		196656BB28F7EA660097356B /* YS Text-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YS Text-Regular.ttf"; sourceTree = "<group>"; };
 		19C76ACD28E43CFE0080A069 /* ImagesListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListCell.swift; sourceTree = "<group>"; };
 		19C7FF7F28DC58BC00374BBD /* ImageFeed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageFeed.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		19C7FF8228DC58BC00374BBD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -51,6 +53,7 @@
 			isa = PBXGroup;
 			children = (
 				19C7FF8B28DC58BF00374BBD /* Assets.xcassets */,
+				196656BB28F7EA660097356B /* YS Text-Regular.ttf */,
 				19E3B6E628E5738C00928689 /* YS Display-Bold.ttf */,
 				19E3B6E728E5738D00928689 /* YS Display-Medium.ttf */,
 				19C7FF8D28DC58BF00374BBD /* LaunchScreen.storyboard */,
@@ -181,6 +184,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				19C7FF8F28DC58BF00374BBD /* LaunchScreen.storyboard in Resources */,
+				196656BC28F7EA660097356B /* YS Text-Regular.ttf in Resources */,
 				19C7FF8C28DC58BF00374BBD /* Assets.xcassets in Resources */,
 				19C7FF8A28DC58BC00374BBD /* Main.storyboard in Resources */,
 				19E3B6E828E5738D00928689 /* YS Display-Bold.ttf in Resources */,
