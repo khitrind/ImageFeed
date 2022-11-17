@@ -7,8 +7,9 @@
 
 import UIKit
 
-class AuthViewController: UIViewController {
+final class AuthViewController: UIViewController {
 	private let webViewIdentifier = "ShowWebView"
+	private let oAuth2Service = OAuth2Service()
 
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if segue.identifier == webViewIdentifier {
@@ -25,7 +26,9 @@ class AuthViewController: UIViewController {
 
 extension AuthViewController: WebViewViewControllerDelegate {
 	func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String) {
-		// TODO
+		oAuth2Service.fetchAuthToken(code) { result in
+			print(result)
+		}
 	}
 
 	func webViewViewControllerDidCancel(_ vc: WebViewViewController) {
