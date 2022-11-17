@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1935D3172926486E00EF8C69 /* WebViewViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1935D3162926486E00EF8C69 /* WebViewViewControllerDelegate.swift */; };
 		1950476229213AAB00639B75 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1950476129213AAB00639B75 /* Constants.swift */; };
 		19504765292144BE00639B75 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19504764292144BE00639B75 /* AuthViewController.swift */; };
 		195047672921454800639B75 /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195047662921454800639B75 /* WebViewViewController.swift */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1935D3162926486E00EF8C69 /* WebViewViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewControllerDelegate.swift; sourceTree = "<group>"; };
 		1950476129213AAB00639B75 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		19504764292144BE00639B75 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		195047662921454800639B75 /* WebViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewController.swift; sourceTree = "<group>"; };
@@ -67,6 +69,7 @@
 			isa = PBXGroup;
 			children = (
 				19504764292144BE00639B75 /* AuthViewController.swift */,
+				1935D3162926486E00EF8C69 /* WebViewViewControllerDelegate.swift */,
 				195047662921454800639B75 /* WebViewViewController.swift */,
 			);
 			path = Auth;
@@ -225,6 +228,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				19C7FF8728DC58BC00374BBD /* ImagesListViewController.swift in Sources */,
+				1935D3172926486E00EF8C69 /* WebViewViewControllerDelegate.swift in Sources */,
 				19C76ACE28E43CFE0080A069 /* ImagesListCell.swift in Sources */,
 				19EA173628F2D40B0021FBCC /* ProfileViewController.swift in Sources */,
 				19C7FF8328DC58BC00374BBD /* AppDelegate.swift in Sources */,
