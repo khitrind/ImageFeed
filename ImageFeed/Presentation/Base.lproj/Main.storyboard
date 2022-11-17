@@ -408,6 +408,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="progressView" destination="A1J-hy-j8p" id="ExK-Tr-KMA"/>
                         <outlet property="webView" destination="haR-3x-XVh" id="z5v-UX-ZNf"/>
                     </connections>
                 </viewController>
