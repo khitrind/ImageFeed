@@ -70,15 +70,6 @@ extension SingleImageViewController: UIScrollViewDelegate {
 		singleImage
 	}
 
-	// Как будто вообше вот так можно...
-
-//	func scrollViewDidZoom(_ scrollView: UIScrollView) {
-//		let offsetX = max((scrollView.bounds.size.width - scrollView.contentSize.width) / 2, 0)
-//		let offsetY = max((scrollView.bounds.size.height - scrollView.contentSize.height) / 2, 0)
-//
-//		scrollView.contentInset = UIEdgeInsets(top: offsetY, left: offsetX, bottom: offsetY, right: offsetX);
-//	}
-
 	func scrollViewDidZoom(_ scrollView: UIScrollView) {
 		guard let image = singleImage.image else { return }
 

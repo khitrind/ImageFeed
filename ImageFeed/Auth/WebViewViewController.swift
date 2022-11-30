@@ -8,6 +8,12 @@
 import UIKit
 import WebKit
 
+protocol WebViewViewControllerDelegate: AnyObject {
+	func webViewViewControllerDidCancel(_ vc: WebViewViewController)
+	func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String)
+}
+
+
 final class WebViewViewController: UIViewController {
 	@IBOutlet private var webView: WKWebView!
 	@IBOutlet private var progressView: UIProgressView!
@@ -27,7 +33,7 @@ final class WebViewViewController: UIViewController {
 	}
 
 	private func getOauthLink() -> URL {
-		var urlComponents = URLComponents(string: "https://unsplash.com/oauth/authorize")!
+		var urlComponents = URLComponents(string: AuthorizeURL)!
 		urlComponents.queryItems = [
 		   URLQueryItem(name: "client_id", value: AccessKey),
 		   URLQueryItem(name: "redirect_uri", value: RedirectURI),
@@ -73,13 +79,13 @@ final class WebViewViewController: UIViewController {
 	}
 }
 
-
+// MARK: - WKNavigationDelegate
 extension WebViewViewController: WKNavigationDelegate {
 	private func code(from navigationAction: WKNavigationAction) -> String? {
 		if
 			let url = navigationAction.request.url,
 			let urlComponents = URLComponents(string: url.absoluteString),
-			urlComponents.path == "/oauth/authorize/native",
+			urlComponents.path == NativePath,
 			let items = urlComponents.queryItems,
 			let codeItem = items.first(where: { $0.name == "code" })
 		{

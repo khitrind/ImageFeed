@@ -12,6 +12,8 @@ final class OAuth2Service {
 	  case codeError
 	}
 
+	private let jsonDecoder = JSONDecoder()
+
 	func fetchAuthToken(_ code: String, handler: @escaping (Result<String, Error>) -> Void) {
 		if var urlComponents = URLComponents(string: "https://unsplash.com/oauth/token") {
 			urlComponents.queryItems = [
@@ -24,28 +26,32 @@ final class OAuth2Service {
 			var request = URLRequest(url: urlComponents.url!)
 			request.httpMethod = "POST"
 
-			let task = URLSession.shared.dataTask(with: request) { data, response, error in
+			let task = URLSession.shared.dataTask(with: request) { [weak self]  data, response, error in
+				guard let self = self else { return }
+
 				if let error = error {
 				  handler(.failure(error))
 				  return
 				}
 
-				if let response = response as? HTTPURLResponse, response.statusCode < 200 || response.statusCode >= 300 {
-					print(response.statusCode)
+				if let response = response as? HTTPURLResponse,
+				   response.statusCode < 200 || response.statusCode >= 300 {
 				  handler(.failure(NetworkError.codeError))
 				  return
 				}
 
 				if let data = data {
 					do {
-						let response = try JSONDecoder().decode(OAuthTokenResponseBody.self, from: data)
-						handler(.success(response.accessToken))
+						let response = try self.jsonDecoder.decode(
+							OAuthTokenResponseBody.self, from: data)
+						DispatchQueue.main.async {
+							handler(.success(response.accessToken))
+						}
 					} catch let error {
 						handler(.failure(error))
 					}
 				}
 			}
-
 			task.resume()
 		}
 	}
