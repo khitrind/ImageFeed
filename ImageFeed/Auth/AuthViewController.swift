@@ -14,14 +14,14 @@ protocol AuthViewControllerDelegate: AnyObject {
 final class AuthViewController: UIViewController {
 	private let webViewIdentifier = "ShowWebView"
 	private let oAuth2Service = OAuth2Service()
-	private let oAuth2TokenStorage = OAuth2TokenStorage()
+	private var oAuth2TokenStorage: OAuth2TokenStorageProtocol = OAuth2TokenStorage()
 	weak var delegate: AuthViewControllerDelegate?
 
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if segue.identifier == webViewIdentifier {
-			guard
-				let webViewViewController = segue.destination as? WebViewViewController
+			guard let webViewViewController = segue.destination as? WebViewViewController
 			else { fatalError("Failed to prepare for \(webViewIdentifier)") }
+
 			webViewViewController.delegate = self
 		} else {
 			super.prepare(for: segue, sender: sender)

@@ -31,7 +31,9 @@ final class SplashViewController: UIViewController {
 		let tabBarController = UIStoryboard(name: "Main", bundle: .main)
 			.instantiateViewController(withIdentifier: "TabBarViewController")
 		window.rootViewController = tabBarController
-	}}
+	}
+}
+
 
 // MARK: - AuthViewControllerDelegate
 extension SplashViewController: AuthViewControllerDelegate {
@@ -40,6 +42,7 @@ extension SplashViewController: AuthViewControllerDelegate {
 	}
 }
 
+// MARK: - Segue
 extension SplashViewController {
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if segue.identifier == showAuthIdentifier {
