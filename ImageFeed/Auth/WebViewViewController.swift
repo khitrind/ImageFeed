@@ -15,8 +15,8 @@ protocol WebViewViewControllerDelegate: AnyObject {
 
 
 final class WebViewViewController: UIViewController {
-	@IBOutlet private var webView: WKWebView!
-	@IBOutlet private var progressView: UIProgressView!
+	@IBOutlet private weak var webView: WKWebView!
+	@IBOutlet private weak var progressView: UIProgressView!
 
 	weak var delegate: WebViewViewControllerDelegate?
 
@@ -90,9 +90,8 @@ extension WebViewViewController: WKNavigationDelegate {
 			let codeItem = items.first(where: { $0.name == "code" })
 		{
 			return codeItem.value
-		} else {
-			return nil
 		}
+		return nil
 	}
 
 	func webView(
