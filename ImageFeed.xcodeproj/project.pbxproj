@@ -11,6 +11,12 @@
 		19504765292144BE00639B75 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19504764292144BE00639B75 /* AuthViewController.swift */; };
 		195047672921454800639B75 /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195047662921454800639B75 /* WebViewViewController.swift */; };
 		196656BC28F7EA660097356B /* YS Text-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 196656BB28F7EA660097356B /* YS Text-Regular.ttf */; };
+		196D95D8294369CC00E1962A /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196D95D7294369CC00E1962A /* UIImage+Extension.swift */; };
+		196D95DA29436A4000E1962A /* ImageAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196D95D929436A4000E1962A /* ImageAsset.swift */; };
+		196D95DC29436CEB00E1962A /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196D95DB29436CEB00E1962A /* UIColor+Extension.swift */; };
+		196D95DE29436D2300E1962A /* ColorAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196D95DD29436D2300E1962A /* ColorAsset.swift */; };
+		196D95E029436DCC00E1962A /* FontAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196D95DF29436DCC00E1962A /* FontAsset.swift */; };
+		196D95E229436DFF00E1962A /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196D95E129436DFF00E1962A /* UIFont+Extension.swift */; };
 		19833F412926AA140063D6E9 /* OAuthTokenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19833F402926AA140063D6E9 /* OAuthTokenResponse.swift */; };
 		19833F432926AC370063D6E9 /* OAuth2Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19833F422926AC370063D6E9 /* OAuth2Service.swift */; };
 		19A55A27292B8B32005FF249 /* OAuth2TokenStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A55A26292B8B32005FF249 /* OAuth2TokenStorage.swift */; };
@@ -33,6 +39,12 @@
 		19504764292144BE00639B75 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		195047662921454800639B75 /* WebViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewController.swift; sourceTree = "<group>"; };
 		196656BB28F7EA660097356B /* YS Text-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YS Text-Regular.ttf"; sourceTree = "<group>"; };
+		196D95D7294369CC00E1962A /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
+		196D95D929436A4000E1962A /* ImageAsset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageAsset.swift; sourceTree = "<group>"; };
+		196D95DB29436CEB00E1962A /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		196D95DD29436D2300E1962A /* ColorAsset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorAsset.swift; sourceTree = "<group>"; };
+		196D95DF29436DCC00E1962A /* FontAsset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontAsset.swift; sourceTree = "<group>"; };
+		196D95E129436DFF00E1962A /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
 		19833F402926AA140063D6E9 /* OAuthTokenResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthTokenResponse.swift; sourceTree = "<group>"; };
 		19833F422926AC370063D6E9 /* OAuth2Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2Service.swift; sourceTree = "<group>"; };
 		19A55A26292B8B32005FF249 /* OAuth2TokenStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2TokenStorage.swift; sourceTree = "<group>"; };
@@ -82,6 +94,16 @@
 			path = Auth;
 			sourceTree = "<group>";
 		};
+		196D95D62943699500E1962A /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				196D95D7294369CC00E1962A /* UIImage+Extension.swift */,
+				196D95DB29436CEB00E1962A /* UIColor+Extension.swift */,
+				196D95E129436DFF00E1962A /* UIFont+Extension.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		19833F3F2926A9FD0063D6E9 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -94,6 +116,9 @@
 			isa = PBXGroup;
 			children = (
 				19C7FF8B28DC58BF00374BBD /* Assets.xcassets */,
+				196D95D929436A4000E1962A /* ImageAsset.swift */,
+				196D95DF29436DCC00E1962A /* FontAsset.swift */,
+				196D95DD29436D2300E1962A /* ColorAsset.swift */,
 				196656BB28F7EA660097356B /* YS Text-Regular.ttf */,
 				19E3B6E628E5738C00928689 /* YS Display-Bold.ttf */,
 				19E3B6E728E5738D00928689 /* YS Display-Medium.ttf */,
@@ -130,6 +155,7 @@
 		19C7FF8128DC58BC00374BBD /* ImageFeed */ = {
 			isa = PBXGroup;
 			children = (
+				196D95D62943699500E1962A /* Helpers */,
 				19833F3F2926A9FD0063D6E9 /* Models */,
 				19D1E68028F43D130061BA0C /* SingleImage */,
 				19504763292144AF00639B75 /* Auth */,
@@ -244,11 +270,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				196D95DA29436A4000E1962A /* ImageAsset.swift in Sources */,
+				196D95E229436DFF00E1962A /* UIFont+Extension.swift in Sources */,
 				19C7FF8728DC58BC00374BBD /* ImagesListViewController.swift in Sources */,
+				196D95D8294369CC00E1962A /* UIImage+Extension.swift in Sources */,
 				19833F432926AC370063D6E9 /* OAuth2Service.swift in Sources */,
 				19C76ACE28E43CFE0080A069 /* ImagesListCell.swift in Sources */,
 				19833F412926AA140063D6E9 /* OAuthTokenResponse.swift in Sources */,
+				196D95DE29436D2300E1962A /* ColorAsset.swift in Sources */,
+				196D95E029436DCC00E1962A /* FontAsset.swift in Sources */,
 				19EA173628F2D40B0021FBCC /* ProfileViewController.swift in Sources */,
+				196D95DC29436CEB00E1962A /* UIColor+Extension.swift in Sources */,
 				19A55A27292B8B32005FF249 /* OAuth2TokenStorage.swift in Sources */,
 				19C7FF8328DC58BC00374BBD /* AppDelegate.swift in Sources */,
 				19504765292144BE00639B75 /* AuthViewController.swift in Sources */,

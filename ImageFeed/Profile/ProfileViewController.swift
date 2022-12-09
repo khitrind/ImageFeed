@@ -16,5 +16,10 @@ class ProfileViewController: UIViewController {
 	@IBOutlet private weak var logoutButton: UIButton!
 	@IBOutlet private weak var descriptionLabel: UILabel!
 	@IBOutlet private weak var userProfileImage: UIImageView!
+
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		
+	}
 }
 
