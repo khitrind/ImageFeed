@@ -9,4 +9,6 @@ import Foundation
 
 enum ColorAsset: String {
 	case Black = "black"
+	case ypWhite = "YP white"
+	case ypGray = "YP gray"
 }

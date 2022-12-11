@@ -9,4 +9,5 @@ import Foundation
 
 enum ImageAsset: String {
 	case userPick = "user_pick"
+	case exitProfileButton = "exit_profile_button"
 }
