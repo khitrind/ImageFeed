@@ -34,7 +34,7 @@ final class AuthViewController: UIViewController {
 
 extension AuthViewController: WebViewViewControllerDelegate {
 	func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String) {
-		ProgressHUD.show()
+		UIBlockingProgressHUD.show()
 		oAuth2Service.fetchAuthToken(code) { [weak self] result in
 			guard let self = self else { return }
 			switch result {
@@ -43,7 +43,7 @@ extension AuthViewController: WebViewViewControllerDelegate {
 						let token = try self.jsonDecoder.decode(
 							OAuthTokenResponseBody.self, from: data)
 						self.oAuth2TokenStorage.token = token.accessToken
-						ProgressHUD.dismiss()
+						UIBlockingProgressHUD.dismiss()
 						self.delegate?.authViewController(self, didAuthenticateWithCode: token.accessToken)
 					} catch let error {
 						print(error)

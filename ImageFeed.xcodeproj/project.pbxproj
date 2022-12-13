@@ -18,6 +18,7 @@
 		196D95DE29436D2300E1962A /* ColorAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196D95DD29436D2300E1962A /* ColorAsset.swift */; };
 		196D95E029436DCC00E1962A /* FontAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196D95DF29436DCC00E1962A /* FontAsset.swift */; };
 		196D95E229436DFF00E1962A /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196D95E129436DFF00E1962A /* UIFont+Extension.swift */; };
+		197768B5294883E400262AE5 /* UIBlockingProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197768B4294883E400262AE5 /* UIBlockingProgressHUD.swift */; };
 		19833F412926AA140063D6E9 /* OAuthTokenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19833F402926AA140063D6E9 /* OAuthTokenResponse.swift */; };
 		19833F432926AC370063D6E9 /* OAuth2Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19833F422926AC370063D6E9 /* OAuth2Service.swift */; };
 		19A55A27292B8B32005FF249 /* OAuth2TokenStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A55A26292B8B32005FF249 /* OAuth2TokenStorage.swift */; };
@@ -46,6 +47,7 @@
 		196D95DD29436D2300E1962A /* ColorAsset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorAsset.swift; sourceTree = "<group>"; };
 		196D95DF29436DCC00E1962A /* FontAsset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontAsset.swift; sourceTree = "<group>"; };
 		196D95E129436DFF00E1962A /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
+		197768B4294883E400262AE5 /* UIBlockingProgressHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBlockingProgressHUD.swift; sourceTree = "<group>"; };
 		19833F402926AA140063D6E9 /* OAuthTokenResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthTokenResponse.swift; sourceTree = "<group>"; };
 		19833F422926AC370063D6E9 /* OAuth2Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2Service.swift; sourceTree = "<group>"; };
 		19A55A26292B8B32005FF249 /* OAuth2TokenStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2TokenStorage.swift; sourceTree = "<group>"; };
@@ -92,6 +94,7 @@
 				19833F422926AC370063D6E9 /* OAuth2Service.swift */,
 				19A55A26292B8B32005FF249 /* OAuth2TokenStorage.swift */,
 				195047662921454800639B75 /* WebViewViewController.swift */,
+				197768B4294883E400262AE5 /* UIBlockingProgressHUD.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -281,6 +284,7 @@
 				196D95DA29436A4000E1962A /* ImageAsset.swift in Sources */,
 				196D95E229436DFF00E1962A /* UIFont+Extension.swift in Sources */,
 				19C7FF8728DC58BC00374BBD /* ImagesListViewController.swift in Sources */,
+				197768B5294883E400262AE5 /* UIBlockingProgressHUD.swift in Sources */,
 				196D95D8294369CC00E1962A /* UIImage+Extension.swift in Sources */,
 				19833F432926AC370063D6E9 /* OAuth2Service.swift in Sources */,
 				19C76ACE28E43CFE0080A069 /* ImagesListCell.swift in Sources */,
