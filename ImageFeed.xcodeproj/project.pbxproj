@@ -18,6 +18,7 @@
 		196D95DE29436D2300E1962A /* ColorAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196D95DD29436D2300E1962A /* ColorAsset.swift */; };
 		196D95E029436DCC00E1962A /* FontAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196D95DF29436DCC00E1962A /* FontAsset.swift */; };
 		196D95E229436DFF00E1962A /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196D95E129436DFF00E1962A /* UIFont+Extension.swift */; };
+		1973F418294CC1E5001A357B /* NetworkRouting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1973F417294CC1E5001A357B /* NetworkRouting.swift */; };
 		197768B5294883E400262AE5 /* UIBlockingProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197768B4294883E400262AE5 /* UIBlockingProgressHUD.swift */; };
 		19833F412926AA140063D6E9 /* OAuthTokenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19833F402926AA140063D6E9 /* OAuthTokenResponse.swift */; };
 		19833F432926AC370063D6E9 /* OAuth2Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19833F422926AC370063D6E9 /* OAuth2Service.swift */; };
@@ -47,6 +48,7 @@
 		196D95DD29436D2300E1962A /* ColorAsset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorAsset.swift; sourceTree = "<group>"; };
 		196D95DF29436DCC00E1962A /* FontAsset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontAsset.swift; sourceTree = "<group>"; };
 		196D95E129436DFF00E1962A /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
+		1973F417294CC1E5001A357B /* NetworkRouting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRouting.swift; sourceTree = "<group>"; };
 		197768B4294883E400262AE5 /* UIBlockingProgressHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBlockingProgressHUD.swift; sourceTree = "<group>"; };
 		19833F402926AA140063D6E9 /* OAuthTokenResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthTokenResponse.swift; sourceTree = "<group>"; };
 		19833F422926AC370063D6E9 /* OAuth2Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2Service.swift; sourceTree = "<group>"; };
@@ -109,6 +111,14 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		1973F416294CC1DC001A357B /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				1973F417294CC1E5001A357B /* NetworkRouting.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
 		19833F3F2926A9FD0063D6E9 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -163,6 +173,7 @@
 				196D95D62943699500E1962A /* Helpers */,
 				19833F3F2926A9FD0063D6E9 /* Models */,
 				19D1E68028F43D130061BA0C /* SingleImage */,
+				1973F416294CC1DC001A357B /* Core */,
 				19504763292144AF00639B75 /* Auth */,
 				19EA173428F2D3240021FBCC /* Profile */,
 				19E12E8C293771D100A7616A /* Splash */,
@@ -289,6 +300,7 @@
 				19833F432926AC370063D6E9 /* OAuth2Service.swift in Sources */,
 				19C76ACE28E43CFE0080A069 /* ImagesListCell.swift in Sources */,
 				19833F412926AA140063D6E9 /* OAuthTokenResponse.swift in Sources */,
+				1973F418294CC1E5001A357B /* NetworkRouting.swift in Sources */,
 				196D95DE29436D2300E1962A /* ColorAsset.swift in Sources */,
 				196D95E029436DCC00E1962A /* FontAsset.swift in Sources */,
 				19EA173628F2D40B0021FBCC /* ProfileViewController.swift in Sources */,

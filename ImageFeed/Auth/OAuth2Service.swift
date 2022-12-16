@@ -8,55 +8,31 @@
 import Foundation
 
 final class OAuth2Service {
-	private enum NetworkError: Error {
-		case codeError
-		case dataError
-	}
-
 	private var lastCode: String?
 	private var task: URLSessionTask?
+	private let networkClient = NetworkRouting()
 	private let jsonDecoder = JSONDecoder()
-	private let urlSession = URLSession.shared
 
-	func fetchAuthToken(_ code: String, handler: @escaping (Result<Data, Error>) -> Void) {
+	func fetchAuthToken(_ code: String, handler: @escaping (Result<String, Error>) -> Void) {
 		assert(Thread.isMainThread)
 		if lastCode == code { return }
 		task?.cancel()
 		lastCode = code
 
-		if var request = makeRequest(code: code) {
-			let task = urlSession.dataTask(with: request) {[weak self] data, response, error in
-				guard let self = self else {return}
-				self.task = nil
-				
-				switch self.prepareResponse(data, response, error) {
-				case .success(let data):
-						DispatchQueue.main.async {handler(.success(data))}
-				case .failure(let error):
-						self.lastCode = nil
-						DispatchQueue.main.async {handler(.failure(error))}
-				}
+		guard let request = makeRequest(code: code) else {return}
+
+		task = networkClient.fetch(request: request) {[weak self] (response: Result<OAuthTokenResponseBody, Error>) in
+			guard let self = self else {return}
+			self.task = nil
+
+			switch response {
+			case .success(let data):
+					handler(.success(data.accessToken))
+			case .failure(let error):
+					self.lastCode = nil
+					handler(.failure(error))
 			}
-			self.task = task
-			task.resume()
 		}
-	}
-
-	private func prepareResponse(_ data: Data?, _ response: URLResponse?, _ error: Error? ) -> Result<Data, Error> {
-		if let error = error {
-			return .failure(error)
-		}
-
-		if let response = response as? HTTPURLResponse,
-		   response.statusCode < 200 || response.statusCode >= 300 {
-			return .failure(NetworkError.codeError)
-		}
-
-		if let data = data {
-			return .success(data)
-		}
-
-		return .failure(NetworkError.dataError)
 	}
 
 	private func makeRequest(code: String) -> URLRequest? {
