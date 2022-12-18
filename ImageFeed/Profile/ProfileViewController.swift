@@ -8,6 +8,9 @@
 import UIKit
 
 class ProfileViewController: UIViewController {
+	private let profileService = ProfileService()
+	private let oAuth2TokenStorageProtocol = OAuth2TokenStorage()
+
 	private let userProfileImage: UIImageView = {
 		let imageView = UIImageView(image: UIImage.asset(ImageAsset.userPick))
 
@@ -58,6 +61,7 @@ class ProfileViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		layoutComponents()
+		loadData(oAuth2TokenStorageProtocol.token)
 	}
 }
 
@@ -87,7 +91,6 @@ extension ProfileViewController {
 		hStack.translatesAutoresizingMaskIntoConstraints = false
 
 		hStack.addArrangedSubview(userProfileImage)
-//		hStack.addArrangedSubview(UIView())
 		hStack.addArrangedSubview(logoutButton)
 
 		vStack.addArrangedSubview(hStack)
@@ -105,5 +108,35 @@ extension ProfileViewController {
 			hStack.widthAnchor.constraint(equalTo: vStack.widthAnchor),
 			userProfileImage.widthAnchor.constraint(equalToConstant: 70),
 			userProfileImage.heightAnchor.constraint(equalTo: userProfileImage.widthAnchor),		])
+	}
+}
+
+// MARK: - Fetch and set profile data
+extension ProfileViewController {
+	func setProfileData(_ profile: Profile) {
+		loginNameLabel.text = profile.username
+		profileNameLabel.text = profile.name
+		descriptionLabel.text = profile.bio
+	}
+
+	func loadData(_ token: String?) {
+		guard let token = token else { return }
+
+		UIBlockingProgressHUD.show()
+		profileService.fetchProfile(token) { [weak self] result in
+			guard let self = self else { return }
+			switch result {
+				case .success(let profile):
+
+
+
+					DispatchQueue.main.async {
+						self.setProfileData(profile)
+					}
+				case .failure(let error):
+					print(error)
+			}
+			UIBlockingProgressHUD.dismiss()
+		}
 	}
 }

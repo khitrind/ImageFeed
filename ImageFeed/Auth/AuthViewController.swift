@@ -41,12 +41,12 @@ extension AuthViewController: WebViewViewControllerDelegate {
 			case .success(let token):
 					DispatchQueue.main.async {
 						self.oAuth2TokenStorage.token = token
-						UIBlockingProgressHUD.dismiss()
 						self.delegate?.authViewController(self, didAuthenticateWithCode: token)
 					}
 			case .failure(let error):
 					print(error)
 			}
+			UIBlockingProgressHUD.dismiss()
 		}
 	}
 

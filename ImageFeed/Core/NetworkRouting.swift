@@ -67,12 +67,14 @@ final class NetworkRouting: NetworkClient {
 		 }
 
 		 guard let data = data else { return }
+		 print(data)
 
 		 do {
 			 let data = try self.jsonDecoder.decode(Model.self, from: data)
 			 handler(.success(data))
 
 		 } catch let error {
+			 print(error)
 			 handler(.failure(error))
 		 }
 	 }

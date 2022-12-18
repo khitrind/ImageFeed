@@ -11,7 +11,6 @@ final class OAuth2Service {
 	private var lastCode: String?
 	private var task: URLSessionTask?
 	private let networkClient = NetworkRouting()
-	private let jsonDecoder = JSONDecoder()
 
 	func fetchAuthToken(_ code: String, handler: @escaping (Result<String, Error>) -> Void) {
 		assert(Thread.isMainThread)
@@ -19,7 +18,7 @@ final class OAuth2Service {
 		task?.cancel()
 		lastCode = code
 
-		guard let request = makeRequest(code: code) else {return}
+		guard let request = buildRequest(code: code) else {return}
 
 		task = networkClient.fetch(request: request) {[weak self] (response: Result<OAuthTokenResponseBody, Error>) in
 			guard let self = self else {return}
@@ -35,8 +34,8 @@ final class OAuth2Service {
 		}
 	}
 
-	private func makeRequest(code: String) -> URLRequest? {
-		if var urlComponents = URLComponents(string: "https://unsplash.com/oauth/token") {
+	private func buildRequest(code: String) -> URLRequest? {
+		if var urlComponents = URLComponents(string: TokenURL) {
 			urlComponents.queryItems = [
 			   URLQueryItem(name: "client_id", value: AccessKey),
 			   URLQueryItem(name: "redirect_uri", value: RedirectURI),
