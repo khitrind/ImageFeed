@@ -14,10 +14,7 @@ protocol AuthViewControllerDelegate: AnyObject {
 
 final class AuthViewController: UIViewController {
 	private let webViewIdentifier = "ShowWebView"
-	private let oAuth2Service = OAuth2Service()
-	private var oAuth2TokenStorage: OAuth2TokenStorageProtocol = OAuth2TokenStorage()
 	weak var delegate: AuthViewControllerDelegate?
-	private let jsonDecoder = JSONDecoder()
 
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if segue.identifier == webViewIdentifier {
@@ -34,20 +31,7 @@ final class AuthViewController: UIViewController {
 
 extension AuthViewController: WebViewViewControllerDelegate {
 	func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String) {
-		UIBlockingProgressHUD.show()
-		oAuth2Service.fetchAuthToken(code) { [weak self] result in
-			guard let self = self else { return }
-			switch result {
-			case .success(let token):
-					DispatchQueue.main.async {
-						self.oAuth2TokenStorage.token = token
-						self.delegate?.authViewController(self, didAuthenticateWithCode: token)
-					}
-			case .failure(let error):
-					print(error)
-			}
-			UIBlockingProgressHUD.dismiss()
-		}
+		self.delegate?.authViewController(self, didAuthenticateWithCode: code)
 	}
 
 	func webViewViewControllerDidCancel(_ vc: WebViewViewController) {

@@ -8,8 +8,7 @@
 import UIKit
 
 class ProfileViewController: UIViewController {
-	private let profileService = ProfileService()
-	private let oAuth2TokenStorageProtocol = OAuth2TokenStorage()
+	private let profileService = ProfileService.shared
 
 	private let userProfileImage: UIImageView = {
 		let imageView = UIImageView(image: UIImage.asset(ImageAsset.userPick))
@@ -61,7 +60,7 @@ class ProfileViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		layoutComponents()
-		loadData(oAuth2TokenStorageProtocol.token)
+		updateProfileDetails(profile: profileService.profile)
 	}
 }
 
@@ -111,32 +110,13 @@ extension ProfileViewController {
 	}
 }
 
-// MARK: - Fetch and set profile data
+// MARK: - Update Profile data
 extension ProfileViewController {
-	func setProfileData(_ profile: Profile) {
+
+	private func updateProfileDetails(profile: Profile?) {
+		guard let profile = profile else { return }
 		loginNameLabel.text = profile.username
 		profileNameLabel.text = profile.name
 		descriptionLabel.text = profile.bio
-	}
-
-	func loadData(_ token: String?) {
-		guard let token = token else { return }
-
-		UIBlockingProgressHUD.show()
-		profileService.fetchProfile(token) { [weak self] result in
-			guard let self = self else { return }
-			switch result {
-				case .success(let profile):
-
-
-
-					DispatchQueue.main.async {
-						self.setProfileData(profile)
-					}
-				case .failure(let error):
-					print(error)
-			}
-			UIBlockingProgressHUD.dismiss()
-		}
 	}
 }

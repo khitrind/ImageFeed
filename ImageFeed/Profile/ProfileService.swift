@@ -8,15 +8,27 @@
 import Foundation
 
 final class ProfileService {
+	private(set) var profile: Profile?
 	private var task: URLSessionTask?
+	static let shared = ProfileService()
 
 	private let networkClient = NetworkRouting()
 
-	func fetchProfile(_ token: String, completion: @escaping (Result<Profile, Error>) -> Void) {
+	func fetchProfile(_ token: String, completion: @escaping (Result<Void, Error>) -> Void) {
 		task?.cancel()
 
 		if let request = buildRequest(authToken: token) {
-			task = networkClient.fetch(request: request, handler: completion)
+			task = networkClient.fetch(request: request) { [weak self] (result: Result<Profile, Error>) in
+				guard let self = self else { return }
+				switch result {
+					case .success(let profile):
+						self.profile = profile
+						completion(.success(()))
+					case .failure(let error):
+						completion(.failure(error))
+						print(error)
+				}
+			}
 		}
 	}
 
