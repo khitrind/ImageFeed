@@ -14,7 +14,7 @@ final class ProfileService {
 
 	private let networkClient = NetworkRouting()
 
-	func fetchProfile(_ token: String, completion: @escaping (Result<Void, Error>) -> Void) {
+	func fetchProfile(_ token: String, completion: @escaping (Result<String, Error>) -> Void) {
 		task?.cancel()
 
 		if let request = buildRequest(authToken: token) {
@@ -23,7 +23,7 @@ final class ProfileService {
 				switch result {
 					case .success(let profile):
 						self.profile = profile
-						completion(.success(()))
+						completion(.success(profile.username))
 					case .failure(let error):
 						completion(.failure(error))
 						print(error)

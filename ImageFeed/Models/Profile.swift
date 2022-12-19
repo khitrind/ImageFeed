@@ -11,6 +11,7 @@ struct Profile: Decodable {
 	let username: String
 	let name: String
 	let bio: String
+	var login: String {"@\(username)"}
 
 	enum CodingKeys: String, CodingKey {
 		case username = "username"
@@ -25,6 +26,6 @@ struct Profile: Decodable {
 		bio = try container.decodeIfPresent(String.self, forKey: .bio) ?? ""
 		
 		let username = try container.decode(String.self, forKey: .username)
-		self.username = "@\(username)"
+		self.username = username
 	}
 }

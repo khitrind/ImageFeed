@@ -8,9 +8,11 @@
 import UIKit
 
 final class SplashViewController: UIViewController {
+	private let profileService = ProfileService.shared
+	private let profileImageService = ProfileImageService.shared
+
 	private let oAuth2Service = OAuth2Service()
 	private var oAuth2TokenStorage: OAuth2TokenStorageProtocol = OAuth2TokenStorage()
-	private let profileService = ProfileService.shared
 
 	private let showAuthIdentifier = "ShowAuthIdentifier"
 
@@ -66,11 +68,13 @@ extension SplashViewController: AuthViewControllerDelegate {
 		profileService.fetchProfile(token) { [weak self] result in
 			guard let self = self else { return }
 			switch result {
-				case .success:
+				case .success(let username):
+					ProfileImageService.shared.fetchProfileImageURL(username: username) { _ in }
 					DispatchQueue.main.async {
 						self.switchToTabBarController()
 					}
-				case .failure:
+				case .failure (let error):
+					print(error.localizedDescription)
 					UIBlockingProgressHUD.dismiss()
 					break
 			}

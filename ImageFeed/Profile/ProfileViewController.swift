@@ -115,7 +115,7 @@ extension ProfileViewController {
 
 	private func updateProfileDetails(profile: Profile?) {
 		guard let profile = profile else { return }
-		loginNameLabel.text = profile.username
+		loginNameLabel.text = profile.login
 		profileNameLabel.text = profile.name
 		descriptionLabel.text = profile.bio
 	}
