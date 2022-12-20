@@ -17,5 +17,5 @@ let AuthorizeURL = "https://unsplash.com/oauth/authorize"
 let NativePath = "/oauth/authorize/native"
 let TokenURL = "https://unsplash.com/oauth/token"
 let ProfileURL = "\(BaseURL)/me"
-let ProfileImageURL = "\(BaseURL)/users/:username"
+let ProfileImageURL = "\(BaseURL)/users"
 
