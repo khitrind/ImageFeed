@@ -14,11 +14,13 @@ final class ProfileService {
 
 	private let networkClient = NetworkRouting()
 
+	private init() {}
+
 	func fetchProfile(_ token: String, completion: @escaping (Result<String, Error>) -> Void) {
 		task?.cancel()
 
 		if let request = buildRequest(authToken: token) {
-			task = networkClient.fetch(request: request) { [weak self] (result: Result<Profile, Error>) in
+			task = networkClient.fetch(requestType: .urlRequest(urlRequest: request)) { [weak self] (result: Result<Profile, Error>) in
 				guard let self = self else { return }
 				switch result {
 					case .success(let profile):

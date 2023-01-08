@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  ErrorAlertViewController.swift
 //  ImageFeed
 //
 //  Created by Dmitry Khitrin on 08/01/2023.

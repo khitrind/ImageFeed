@@ -24,8 +24,6 @@ struct Profile: Decodable {
 		self.name = try container.decode(String.self, forKey: .name)
 
 		bio = try container.decodeIfPresent(String.self, forKey: .bio) ?? ""
-		
-		let username = try container.decode(String.self, forKey: .username)
-		self.username = username
+		username = try container.decode(String.self, forKey: .username)
 	}
 }

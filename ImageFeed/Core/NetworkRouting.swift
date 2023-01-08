@@ -7,80 +7,80 @@
 
 import Foundation
 
-protocol NetworkClient {
-	func fetch<Model: Decodable>(
-		url: URL,
-		handler: @escaping (Result<Model, Error>) -> Void
-	) -> URLSessionTask
-
-	func fetch<Model: Decodable>(
-		request: URLRequest,
-		handler: @escaping (Result<Model, Error>) -> Void
-	) -> URLSessionTask
+enum RequestType {
+   case url(url: URL)
+   case urlRequest(urlRequest: URLRequest)
 }
 
+protocol NetworkClient {
+   func fetch<Model: Decodable>(requestType: RequestType, handler: @escaping (Result<Model, Error>) -> Void) -> URLSessionTask
+}
 
 final class NetworkRouting: NetworkClient {
 	private let jsonDecoder = JSONDecoder()
-	private let urlSession: URLSession = URLSession(configuration: URLSessionConfiguration.default)
+	private let urlSession: URLSession = URLSession.shared
 
 	private enum NetworkError: LocalizedError {
 		case codeError
+		case emptyData
 		case parsingError
 
 		 public var errorDescription: String? {
 			 switch self {
 			 case .codeError:
-				 return NSLocalizedString("Backend returned non 200 code.", comment: "NetworkClient")
+					 return NSLocalizedString("Backend returned non 200 code.", comment: "NetworkClient")
 			 case .parsingError:
-				 return NSLocalizedString("Parsing model Error", comment: "NetworkClient")
-
+					 return NSLocalizedString("Parsing model Error", comment: "NetworkClient")
+			 case .emptyData:
+					 return NSLocalizedString("Empty data Error", comment: "NetworkClient")
 			 }
 		 }
 	 }
 
-	public func fetch<Model: Decodable>(
-		url: URL,
-		handler: @escaping (Result<Model, Error>) -> Void
-	) -> URLSessionTask  {
-		let request = URLRequest(url: url)
-		return fetch(request: request, handler: handler)
-	}
 
+	func fetch<Model>(
+		requestType: RequestType,
+		handler: @escaping (Result<Model, Error>) -> Void)
+	-> URLSessionTask where Model : Decodable {
+		let request: URLRequest
+			 switch requestType {
+			 case .url(let url):
+				 request = URLRequest(url: url)
+			 case .urlRequest(let urlRequest):
+				 request = urlRequest
+			 }
 
-	public func fetch<Model: Decodable>(
-	 request: URLRequest,
-	 handler: @escaping (Result<Model, Error>) -> Void
- ) -> URLSessionTask {
-	 let task = urlSession.dataTask(
-		 with: request
-	 ) { data, response, error in
-		 if let error = error {
-			 handler(.failure(error))
-			 return
-		 }
+		let task = urlSession.dataTask(
+			with: request
+		) { data, response, error in
+			if let error = error {
+				handler(.failure(error))
+				return
+			}
 
-		 if let response = response as? HTTPURLResponse,
-			response.statusCode < 200 || response.statusCode >= 300 {
-			 handler(.failure(NetworkError.codeError))
-			 return
-		 }
+			if let response = response as? HTTPURLResponse,
+			   response.statusCode < 200 || response.statusCode >= 300 {
+				handler(.failure(NetworkError.codeError))
+				return
 
-		 guard let data = data else { return }
-		 print(data)
+			}
+			guard let data = data else {
+				handler(.failure(NetworkError.emptyData))
+				return
+			}
 
-		 do {
-			 let data = try self.jsonDecoder.decode(Model.self, from: data)
-			 handler(.success(data))
+			do {
+				let data = try self.jsonDecoder.decode(Model.self, from: data)
+				handler(.success(data))
 
-		 } catch let error {
-			 print(error)
-			 handler(.failure(error))
-		 }
-	 }
+			} catch let error {
+				print(error)
+				handler(.failure(error))
 
-	 task.resume()
+			}
 
-	 return task
+		}
+		task.resume()
+		return task
  }
 }

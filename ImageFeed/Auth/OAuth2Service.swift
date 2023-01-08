@@ -14,13 +14,12 @@ final class OAuth2Service {
 
 	func fetchAuthToken(_ code: String, handler: @escaping (Result<String, Error>) -> Void) {
 		assert(Thread.isMainThread)
-		if lastCode == code { return }
+		guard lastCode != code, let request = buildRequest(code: code)  else { return }
+
 		task?.cancel()
 		lastCode = code
 
-		guard let request = buildRequest(code: code) else {return}
-
-		task = networkClient.fetch(request: request) {[weak self] (response: Result<OAuthTokenResponseBody, Error>) in
+		task = networkClient.fetch(requestType: .urlRequest(urlRequest: request)) {[weak self] (response: Result<OAuthTokenResponseBody, Error>) in
 			guard let self = self else {return}
 			self.task = nil
 
