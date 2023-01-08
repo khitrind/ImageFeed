@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class ProfileViewController: UIViewController {
 	private let profileService = ProfileService.shared
@@ -61,6 +62,7 @@ class ProfileViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		layoutComponents()
+		observeAvatarChanges()
 		updateProfileDetails(profile: profileService.profile)
 	}
 }
@@ -82,11 +84,17 @@ extension ProfileViewController {
 	}
 
 	private func updateAvatar() {
-		 guard
+		guard
 			 let profileImageURL = ProfileImageService.shared.avatarURL,
 			 let url = URL(string: profileImageURL)
 		 else { return }
-		 // TODO [Sprint 11] Обновить аватар, используя Kingfisher
+
+		userProfileImage.kf.setImage(with: url,
+									 placeholder: UIImage(named: "stub"),
+									 options: [
+										.transition(.fade(1)),
+										.cacheOriginalImage
+									 ])
 	 }
 }
 
