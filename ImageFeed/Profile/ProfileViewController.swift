@@ -6,8 +6,12 @@
 //
 
 import UIKit
+import Kingfisher
 
-class ProfileViewController: UIViewController {
+final class ProfileViewController: UIViewController {
+	private let profileService = ProfileService.shared
+	private var profileImageServiceObserver: NSObjectProtocol?
+
 	private let userProfileImage: UIImageView = {
 		let imageView = UIImageView(image: UIImage.asset(ImageAsset.userPick))
 
@@ -58,9 +62,41 @@ class ProfileViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		layoutComponents()
+		observeAvatarChanges()
+		updateProfileDetails(profile: profileService.profile)
 	}
 }
 
+
+// MARK: - Notification
+extension ProfileViewController {
+	private func observeAvatarChanges() {
+		profileImageServiceObserver = NotificationCenter.default
+					.addObserver(
+						forName: ProfileImageService.DidChangeNotification,
+						object: nil,
+						queue: .main
+					) { [weak self] _ in
+						guard let self = self else { return }
+						self.updateAvatar()
+					}
+				updateAvatar()
+	}
+
+	private func updateAvatar() {
+		guard
+			 let profileImageURL = ProfileImageService.shared.avatarURL,
+			 let url = URL(string: profileImageURL)
+		 else { return }
+
+		userProfileImage.kf.setImage(with: url,
+									 placeholder: UIImage(named: "stub"),
+									 options: [
+										.transition(.fade(1)),
+										.cacheOriginalImage
+									 ])
+	 }
+}
 
 
 extension ProfileViewController {
@@ -87,7 +123,6 @@ extension ProfileViewController {
 		hStack.translatesAutoresizingMaskIntoConstraints = false
 
 		hStack.addArrangedSubview(userProfileImage)
-//		hStack.addArrangedSubview(UIView())
 		hStack.addArrangedSubview(logoutButton)
 
 		vStack.addArrangedSubview(hStack)
@@ -105,5 +140,16 @@ extension ProfileViewController {
 			hStack.widthAnchor.constraint(equalTo: vStack.widthAnchor),
 			userProfileImage.widthAnchor.constraint(equalToConstant: 70),
 			userProfileImage.heightAnchor.constraint(equalTo: userProfileImage.widthAnchor),		])
+	}
+}
+
+// MARK: - Update Profile data
+extension ProfileViewController {
+
+	private func updateProfileDetails(profile: Profile?) {
+		guard let profile = profile else { return }
+		loginNameLabel.text = profile.login
+		profileNameLabel.text = profile.name
+		descriptionLabel.text = profile.bio
 	}
 }

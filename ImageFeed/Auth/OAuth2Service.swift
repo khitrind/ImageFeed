@@ -8,14 +8,33 @@
 import Foundation
 
 final class OAuth2Service {
-	private enum NetworkError: Error {
-	  case codeError
-	}
-
-	private let jsonDecoder = JSONDecoder()
+	private var lastCode: String?
+	private var task: URLSessionTask?
+	private let networkClient = NetworkRouting()
 
 	func fetchAuthToken(_ code: String, handler: @escaping (Result<String, Error>) -> Void) {
-		if var urlComponents = URLComponents(string: "https://unsplash.com/oauth/token") {
+		assert(Thread.isMainThread)
+		guard lastCode != code, let request = buildRequest(code: code)  else { return }
+
+		task?.cancel()
+		lastCode = code
+
+		task = networkClient.fetch(requestType: .urlRequest(urlRequest: request)) {[weak self] (response: Result<OAuthTokenResponseBody, Error>) in
+			guard let self = self else {return}
+			self.task = nil
+
+			switch response {
+			case .success(let data):
+					handler(.success(data.accessToken))
+			case .failure(let error):
+					self.lastCode = nil
+					handler(.failure(error))
+			}
+		}
+	}
+
+	private func buildRequest(code: String) -> URLRequest? {
+		if var urlComponents = URLComponents(string: TokenURL) {
 			urlComponents.queryItems = [
 			   URLQueryItem(name: "client_id", value: AccessKey),
 			   URLQueryItem(name: "redirect_uri", value: RedirectURI),
@@ -26,33 +45,8 @@ final class OAuth2Service {
 			var request = URLRequest(url: urlComponents.url!)
 			request.httpMethod = "POST"
 
-			let task = URLSession.shared.dataTask(with: request) { [weak self]  data, response, error in
-				guard let self = self else { return }
-
-				if let error = error {
-				  handler(.failure(error))
-				  return
-				}
-
-				if let response = response as? HTTPURLResponse,
-				   response.statusCode < 200 || response.statusCode >= 300 {
-				  handler(.failure(NetworkError.codeError))
-				  return
-				}
-
-				if let data = data {
-					do {
-						let response = try self.jsonDecoder.decode(
-							OAuthTokenResponseBody.self, from: data)
-						DispatchQueue.main.async {
-							handler(.success(response.accessToken))
-						}
-					} catch let error {
-						handler(.failure(error))
-					}
-				}
-			}
-			task.resume()
+			return request
 		}
+		return nil
 	}
 }
