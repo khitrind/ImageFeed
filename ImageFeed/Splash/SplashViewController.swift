@@ -13,6 +13,7 @@ final class SplashViewController: UIViewController {
 
 	private let oAuth2Service = OAuth2Service()
 	private var oAuth2TokenStorage: OAuth2TokenStorageProtocol = OAuth2TokenStorage()
+	private let errorAlertController = ErrorAlertViewController()
 
 	private let showAuthIdentifier = "ShowAuthIdentifier"
 
@@ -39,7 +40,6 @@ final class SplashViewController: UIViewController {
 	}
 }
 
-
 // MARK: - AuthViewControllerDelegate
 extension SplashViewController: AuthViewControllerDelegate {
 	func authViewController(_ vc: AuthViewController, didAuthenticateWithCode code: String) {
@@ -57,9 +57,9 @@ extension SplashViewController: AuthViewControllerDelegate {
 			case .success(let token):
 					self.oAuth2TokenStorage.token = token
 					self.fetchProfile(token: token)
-			case .failure(let error):
+			case .failure:
 					UIBlockingProgressHUD.dismiss()
-					print(error)
+					self.showError()
 			}
 		}
 	}
@@ -73,9 +73,8 @@ extension SplashViewController: AuthViewControllerDelegate {
 					DispatchQueue.main.async {
 						self.switchToTabBarController()
 					}
-				case .failure (let error):
-					print(error.localizedDescription)
-					UIBlockingProgressHUD.dismiss()
+				case .failure:
+					self.showError()
 					break
 			}
 			UIBlockingProgressHUD.dismiss()
@@ -96,5 +95,22 @@ extension SplashViewController {
 		} else {
 			super.prepare(for: segue, sender: sender)
 		   }
+	}
+}
+
+// MARK: - ErrorShowing
+extension SplashViewController {
+	private func showError() {
+		DispatchQueue.main.async { [weak self] in
+			guard let self = self else {return }
+			self.errorAlertController
+				.displayAlert(
+					over: self,
+					title: "Error!",
+					message: "Something went wrong",
+					actionTitle: "OK") {
+						self.checkAuth()
+					}
+		}
 	}
 }
