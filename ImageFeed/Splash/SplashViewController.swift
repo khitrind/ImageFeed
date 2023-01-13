@@ -33,6 +33,7 @@ final class SplashViewController: UIViewController {
 
 	private func checkAuth() {
 		if let token = oAuth2TokenStorage.token {
+			UIBlockingProgressHUD.show()
 			fetchProfile(token: token)
 		} else {
 			performSegue(withIdentifier: showAuthIdentifier, sender: nil)

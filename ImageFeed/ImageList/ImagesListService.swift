@@ -16,7 +16,7 @@ final class ImageListService {
 	private let networkClient = NetworkRouting()
 
 
-	private var lastLoadedPage: Int?
+	private var lastLoadedPage: Int = 0
 
 	func fetchPhotosNextPage() {
 		if task != nil { return }
@@ -26,6 +26,7 @@ final class ImageListService {
 				guard let self = self else { return }
 				switch result {
 					case .success(let photos):
+						self.updateLastLoadPage()
 						self.preparePhotoResult(data: photos)
 					case .failure(let error):						
 						print(error)
@@ -49,7 +50,7 @@ final class ImageListService {
 		guard let url = URL(string: PhotoUrl) else { return nil }
 
 		var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)
-		let nextPage = lastLoadedPage == nil ? 1 : lastLoadedPage! + 1
+		let nextPage = lastLoadedPage + 1
 
 		let queryItems = [URLQueryItem(name: "page", value:  "\(nextPage)"),
 						  URLQueryItem(name: "per_page", value: "10")]
@@ -68,5 +69,9 @@ final class ImageListService {
 				name: ImageListService.DidChangeNotification,
 				object: self
 			)
+	}
+
+	private func updateLastLoadPage() {
+		lastLoadedPage = lastLoadedPage + 1
 	}
 }

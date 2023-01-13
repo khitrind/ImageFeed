@@ -36,6 +36,7 @@ class SingleImageViewController: UIViewController {
 	}
 
 	private func setImage() {
+		singleImage.kf.indicatorType = .activity
 		singleImage.kf.setImage(with: image)
 		if let image = singleImage.image {
 			rescaleScrollViewForPerfectView(image: image)

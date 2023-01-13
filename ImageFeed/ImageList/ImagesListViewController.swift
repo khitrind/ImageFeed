@@ -81,6 +81,7 @@ extension ImagesListViewController {
 		let oldCount = photos.count
 		let newCount = imageListService.photos.count
 		photos = imageListService.photos
+		print(photos)
 		if oldCount != newCount {
 			tableView.performBatchUpdates {
 				let indexPaths = (oldCount..<newCount).map { i in
