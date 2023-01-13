@@ -8,7 +8,7 @@
 import UIKit
 
 class SingleImageViewController: UIViewController {
-	var image: UIImage! {
+	var image: URL! {
 		didSet {
 			guard isViewLoaded else { return }
 			setImage()
@@ -24,7 +24,7 @@ class SingleImageViewController: UIViewController {
 
 	@IBAction func didClickShareButton() {
 		let share = UIActivityViewController(
-			activityItems: [image],
+			activityItems: [singleImage.image],
 			applicationActivities: nil
 		)
 		present(share, animated: true, completion: nil)
@@ -36,10 +36,12 @@ class SingleImageViewController: UIViewController {
 	}
 
 	private func setImage() {
-		singleImage.image = image
-		rescaleScrollViewForPerfectView(image: image)
-		scrollView.minimumZoomScale = 0.1
-		scrollView.maximumZoomScale = 1.25
+		singleImage.kf.setImage(with: image)
+		if let image = singleImage.image {
+			rescaleScrollViewForPerfectView(image: image)
+			scrollView.minimumZoomScale = 0.1
+			scrollView.maximumZoomScale = 1.25
+		}
 	}
 
 

@@ -9,36 +9,24 @@ import UIKit
 
 class ImagesListViewController: UIViewController {
 	private let singleViewIdentifier = "ShowSingleImageView"
-
-	private var photosName = Array(0..<24).map{ "\($0)" }
-
-	private lazy var dateFormatter: DateFormatter = {
-		let formatter = DateFormatter()
-		formatter.dateStyle = .long
-		formatter.timeStyle = .none
-		return formatter
-	}()
+	private let imageListService = ImageListService.shared
+	private var imageListServiceObserver: NSObjectProtocol?
+	var photos: [Photo] = []
 
 	@IBOutlet private var tableView: UITableView!
 
-	func configCell(for cell: ImagesListCell, with indexPath: IndexPath) {
-		guard let image = UIImage(named: photosName[indexPath.row]) else {
-			return
-		}
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		observeImagesLoad()
+		imageListService.fetchPhotosNextPage()
 
-		cell.cellImage.image = image
-		cell.dateLabel.text = dateFormatter.string(from: Date())
-		let isLiked = indexPath.row % 2 == 0
-		let likeImage = isLiked ? UIImage(named: "like_button_on") : UIImage(named: "like_button_off")
-		cell.likeButton.setImage(likeImage, for: .normal)
 	}
 
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if segue.identifier == singleViewIdentifier {
 			let viewController = segue.destination as! SingleImageViewController
 			let indexPath = sender as! IndexPath
-			let image = UIImage(named: photosName[indexPath.row])
-			viewController.image = image
+			viewController.image = photos[indexPath.row].thumbImageURL
 		} else {
 			super.prepare(for: segue, sender: sender)
 		}
@@ -47,7 +35,7 @@ class ImagesListViewController: UIViewController {
 
 extension ImagesListViewController: UITableViewDataSource {
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return photosName.count
+		return photos.count
 	}
 
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -57,8 +45,15 @@ extension ImagesListViewController: UITableViewDataSource {
 			return UITableViewCell()
 		}
 
-		configCell(for: imageListCell, with: indexPath)
+		imageListCell.configure(imageUrl: photos[indexPath.row].thumbImageURL, for: indexPath.row)
 		return imageListCell
+	}
+
+	func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+		if indexPath.row == photos.count - 1 {
+			imageListService.fetchPhotosNextPage()
+		}
+
 	}
 }
 
@@ -68,3 +63,32 @@ extension ImagesListViewController: UITableViewDelegate {
 	}
 }
 
+// MARK: - Udate rows at TableView
+extension ImagesListViewController {
+	private func observeImagesLoad() {
+		imageListServiceObserver = NotificationCenter.default
+					.addObserver(
+						forName: ImageListService.DidChangeNotification,
+						object: nil,
+						queue: .main
+					) { [weak self] _ in
+						guard let self = self else { return }
+						self.updateTableViewAnimated()
+					}
+	}
+
+	func updateTableViewAnimated() {
+		let oldCount = photos.count
+		let newCount = imageListService.photos.count
+		photos = imageListService.photos
+		if oldCount != newCount {
+			tableView.performBatchUpdates {
+				let indexPaths = (oldCount..<newCount).map { i in
+					IndexPath(row: i, section: 0)
+				}
+				tableView.insertRows(at: indexPaths, with: .automatic)
+			} completion: { _ in }
+		}
+	}
+
+}
