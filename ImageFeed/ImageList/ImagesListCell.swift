@@ -20,12 +20,11 @@ final class ImagesListCell: UITableViewCell {
 		return formatter
 	}()
 
-	public func configure(imageUrl: URL, for row: Int) {
+	public func configure(from photo: Photo, for row: Int) {
 		cellImage.kf.indicatorType = .activity
-		cellImage.kf.setImage(with: imageUrl)
+		cellImage.kf.setImage(with: photo.thumbImageURL)
 		dateLabel.text = dateFormatter.string(from: Date())
-		let isLiked = row % 2 == 0
-		let likeImage = isLiked ? UIImage(named: "like_button_on") : UIImage(named: "like_button_off")
+		let likeImage = photo.isLiked ? UIImage(named: "like_button_on") : UIImage(named: "like_button_off")
 		likeButton.setImage(likeImage, for: .normal)
 	}
 

@@ -35,7 +35,7 @@ final class ProfileService {
 	}
 
 	private func buildRequest(authToken token: String) -> URLRequest? {
-		if let urlComponents = URLComponents(string: ProfileURL) {
+		if let urlComponents = URLComponents(string: profileURL) {
 			var request = URLRequest(url: urlComponents.url!)
 			request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
 			return request

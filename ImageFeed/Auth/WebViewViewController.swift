@@ -34,12 +34,12 @@ final class WebViewViewController: UIViewController {
 	}
 
 	private func getOauthLink() -> URL {
-		var urlComponents = URLComponents(string: AuthorizeURL)!
+		var urlComponents = URLComponents(string: authorizeURL)!
 		urlComponents.queryItems = [
-		   URLQueryItem(name: "client_id", value: AccessKey),
-		   URLQueryItem(name: "redirect_uri", value: RedirectURI),
+		   URLQueryItem(name: "client_id", value: accessKey),
+		   URLQueryItem(name: "redirect_uri", value: redirectURI),
 		   URLQueryItem(name: "response_type", value: "code"),
-		   URLQueryItem(name: "scopes", value: AccessScope)
+		   URLQueryItem(name: "scopes", value: accessScope)
 		 ]
 		return urlComponents.url!
 	}
@@ -68,7 +68,7 @@ extension WebViewViewController: WKNavigationDelegate {
 		if
 			let url = navigationAction.request.url,
 			let urlComponents = URLComponents(string: url.absoluteString),
-			urlComponents.path == NativePath,
+			urlComponents.path == nativePath,
 			let items = urlComponents.queryItems,
 			let codeItem = items.first(where: { $0.name == "code" })
 		{

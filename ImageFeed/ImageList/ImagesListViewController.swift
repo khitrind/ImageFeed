@@ -45,7 +45,7 @@ extension ImagesListViewController: UITableViewDataSource {
 			return UITableViewCell()
 		}
 
-		imageListCell.configure(imageUrl: photos[indexPath.row].thumbImageURL, for: indexPath.row)
+		imageListCell.configure(from: photos[indexPath.row], for: indexPath.row)
 		return imageListCell
 	}
 
@@ -87,7 +87,7 @@ extension ImagesListViewController {
 				let indexPaths = (oldCount..<newCount).map { i in
 					IndexPath(row: i, section: 0)
 				}
-				tableView.insertRows(at: indexPaths, with: .automatic)
+				tableView.insertRows(at: indexPaths, with: .bottom)
 			} completion: { _ in }
 		}
 	}

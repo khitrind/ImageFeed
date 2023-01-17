@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PhotoResult:Decodable  {
+struct PhotoResult: Decodable  {
 	let id: String
 	let createdAt: String
 	let width: Int

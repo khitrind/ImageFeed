@@ -49,7 +49,7 @@ final class ProfileImageService {
 	}
 
 	private func buildRequest(username: String, token: String?) -> URLRequest? {
-		if let urlComponents = URLComponents(string: "\(ProfileImageURL)/\(username)") {
+		if let urlComponents = URLComponents(string: "\(profileImageURL)/\(username)") {
 			var request = URLRequest(url: urlComponents.url!)
 			if let token = token {
 				request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")

@@ -20,8 +20,9 @@ final class ImageListService {
 
 	func fetchPhotosNextPage() {
 		if task != nil { return }
+		guard let url = getNextPhotosURL() else { return }
 
-		if let request = buildRequest() {
+		if let request = buildRequest(url: url) {
 			task = networkClient.fetch(requestType: .urlRequest(urlRequest: request)) { [weak self] (result: Result<[PhotoResult], Error>) in
 				guard let self = self else { return }
 				switch result {
@@ -36,18 +37,15 @@ final class ImageListService {
 		}
 	}
 
-	private func buildRequest() -> URLRequest? {
+	private func buildRequest(url: URL) -> URLRequest? {
 		guard let token = OAuth2TokenStorage().token else { return nil }
-		if let url = getNextPhotosURL() {
-			var request = URLRequest(url: url)
-			request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-			return request
-		}
-		return nil
+		var request = URLRequest(url: url)
+		request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+		return request
 	}
 
 	private func getNextPhotosURL() -> URL? {
-		guard let url = URL(string: PhotoUrl) else { return nil }
+		guard let url = URL(string: photoUrl) else { return nil }
 
 		var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)
 		let nextPage = lastLoadedPage + 1
@@ -73,5 +71,29 @@ final class ImageListService {
 
 	private func updateLastLoadPage() {
 		lastLoadedPage = lastLoadedPage + 1
+	}
+
+	func changeLike(photoId: String, isLike: Bool, _ completion: @escaping (Result<Photo, Error>) -> Void) {
+		if task != nil { return }
+		guard let url = getChangeLikeUrl(id: photoId) else { return }
+
+		if var request = buildRequest(url: url) {
+			request.httpMethod = isLike ? "DELETE" : "POST"
+
+			task = networkClient.fetch(requestType: .urlRequest(urlRequest: request)) { [weak self] (result: Result<PhotoResult, Error>) in
+				guard let self = self else { return }
+				switch result {
+					case .success(let photoResult):
+						completion(.success(Photo.fromPhotoResult(from: photoResult)))
+					case .failure(let error):
+						completion(.failure(error))
+				}
+				self.task = nil
+			}
+		}
+	}
+
+	func getChangeLikeUrl(id: String) -> URL? {
+		return URL(string: "\(baseUrl)/photos/\(id)/like")
 	}
 }
