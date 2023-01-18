@@ -17,6 +17,20 @@ final class SplashViewController: UIViewController {
 
 	private let showAuthIdentifier = "ShowAuthIdentifier"
 
+	private let practicumLogoView: UIImageView = {
+		let imageView = UIImageView()
+		imageView.image = .asset(.splashScreenLogo)
+		imageView.tintColor = .asset(.ypWhite)
+		imageView.contentMode = .scaleAspectFit
+
+		return imageView
+	}()
+
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		layoutComponents()
+	}
+
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
 		checkAuth()
@@ -36,7 +50,11 @@ final class SplashViewController: UIViewController {
 			UIBlockingProgressHUD.show()
 			fetchProfile(token: token)
 		} else {
-			performSegue(withIdentifier: showAuthIdentifier, sender: nil)
+			let authViewController = AuthViewController()
+			authViewController.delegate = self
+			authViewController.modalPresentationStyle = .fullScreen
+			present(authViewController, animated: true)
+//			performSegue(withIdentifier: showAuthIdentifier, sender: nil)
 		}
 	}
 }
@@ -113,5 +131,28 @@ extension SplashViewController {
 						self.checkAuth()
 					}
 		}
+	}
+}
+
+
+// MARK: - Layout
+
+extension SplashViewController {
+	private func layoutComponents() {
+		view.backgroundColor = .asset(.Black)
+		practicumLogoView.translatesAutoresizingMaskIntoConstraints = false
+
+		view.addSubview(practicumLogoView)
+
+		NSLayoutConstraint.activate([
+			practicumLogoView.centerXAnchor.constraint(
+				equalTo: view.centerXAnchor),
+			practicumLogoView.centerYAnchor.constraint(
+				equalTo: view.centerYAnchor),
+			practicumLogoView.widthAnchor.constraint(
+				equalTo: view.widthAnchor, multiplier: 0.2),
+			practicumLogoView.heightAnchor.constraint(
+				equalTo: practicumLogoView.widthAnchor)
+		])
 	}
 }
