@@ -62,6 +62,7 @@ final class ProfileViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		layoutComponents()
+		prepareAction()
 		observeAvatarChanges()
 		updateProfileDetails(profile: profileService.profile)
 	}
@@ -96,6 +97,26 @@ extension ProfileViewController {
 										.cacheOriginalImage
 									 ])
 	 }
+}
+
+//MARK: - LogoutAction
+extension ProfileViewController {
+	private func prepareAction() {
+		logoutButton.addTarget(
+			self,
+			action: #selector(logoutPressed),
+			for: .touchUpInside
+		)
+	}
+
+	@objc private func logoutPressed() {
+		OAuth2TokenStorage().clearToken()
+		WebViewViewController.clean()
+		tabBarController?.dismiss(animated: true)
+		guard let window = UIApplication.shared.windows.first else { fatalError("Invalid Configuration") }
+		window.rootViewController = SplashViewController()
+		window.makeKeyAndVisible()
+	}
 }
 
 

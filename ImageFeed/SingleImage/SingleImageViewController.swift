@@ -32,16 +32,22 @@ class SingleImageViewController: UIViewController {
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		self.scrollView.minimumZoomScale = 0.1
+		self.scrollView.maximumZoomScale = 1.25
 		setImage()
 	}
 
 	private func setImage() {
-		singleImage.kf.indicatorType = .activity
-		singleImage.kf.setImage(with: image)
-		if let image = singleImage.image {
-			rescaleScrollViewForPerfectView(image: image)
-			scrollView.minimumZoomScale = 0.1
-			scrollView.maximumZoomScale = 1.25
+		UIBlockingProgressHUD.show()
+		singleImage.kf.setImage(with: image) { [weak self] result in
+			UIBlockingProgressHUD.dismiss()
+			guard let self = self else { return }
+			switch result {
+				case .success(let imageResult):
+					self.rescaleScrollViewForPerfectView(image: imageResult.image)
+				case .failure:
+					self.displayAlert()
+			}
 		}
 	}
 
@@ -104,5 +110,35 @@ extension SingleImageViewController: UIScrollViewDelegate {
 		let offy = (scrollViewSize.height > realImgSize.height ? (scrollViewSize.height - realImgSize.height) / 2 : 0);
 
 		scrollView.contentInset = UIEdgeInsets(top: offy, left: offx, bottom: offy, right: offx);
+	}
+}
+
+
+extension SingleImageViewController {
+	private func displayAlert() {
+		let alert = UIAlertController(
+			title: "Что-то пошло не так",
+			message: "Попробовать ещё раз?",
+			preferredStyle: .alert
+		)
+
+		let dismissAction = UIAlertAction(
+			title: "Не надо",
+			style: .default
+		) { _ in
+			alert.dismiss(animated: true)
+		}
+
+		let retryAction = UIAlertAction(
+			title: "Попробовать еше раз?",
+			style: .default
+		) { [weak self] _ in
+			guard let self = self else { return }
+					 self.setImage()
+		}
+		alert.addAction(dismissAction)
+		alert.addAction(retryAction)
+
+		self.present(alert, animated: true)
 	}
 }

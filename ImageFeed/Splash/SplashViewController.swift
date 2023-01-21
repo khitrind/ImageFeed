@@ -43,18 +43,23 @@ final class SplashViewController: UIViewController {
 		let tabBarController = UIStoryboard(name: "Main", bundle: .main)
 			.instantiateViewController(withIdentifier: "TabBarViewController")
 		window.rootViewController = tabBarController
+		window.makeKeyAndVisible()
 	}
 
 	private func checkAuth() {
-		if let token = oAuth2TokenStorage.token {
+		if oAuth2TokenStorage.token != nil {
 			UIBlockingProgressHUD.show()
-			fetchProfile(token: token)
+			fetchProfile()
 		} else {
-			let authViewController = AuthViewController()
+			let storyboard = UIStoryboard(name: "Main", bundle: .main)
+			guard let authViewController = storyboard.instantiateViewController(
+				withIdentifier: "AuthViewController"
+			) as? AuthViewController else {
+				return
+			}
 			authViewController.delegate = self
 			authViewController.modalPresentationStyle = .fullScreen
 			present(authViewController, animated: true)
-//			performSegue(withIdentifier: showAuthIdentifier, sender: nil)
 		}
 	}
 }
@@ -70,12 +75,12 @@ extension SplashViewController: AuthViewControllerDelegate {
 	}
 
 	private func fetchOAuthToken(_ code: String) {
-		oAuth2Service.fetchAuthToken(code) { [weak self] result in
+		oAuth2Service.fetchAuthToken(code) {  [weak self] result in
 			guard let self = self else { return }
 			switch result {
 			case .success(let token):
 					self.oAuth2TokenStorage.token = token
-					self.fetchProfile(token: token)
+					self.fetchProfile()
 			case .failure:
 					UIBlockingProgressHUD.dismiss()
 					self.showError()
@@ -83,12 +88,12 @@ extension SplashViewController: AuthViewControllerDelegate {
 		}
 	}
 
-	private func fetchProfile(token: String) {
-		profileService.fetchProfile(token) { [weak self] result in
+	private func fetchProfile() {
+		profileService.fetchProfile { [weak self] result in
 			guard let self = self else { return }
 			switch result {
 				case .success(let username):
-					ProfileImageService.shared.fetchProfileImageURL(username: username, token: token) { _ in }
+					ProfileImageService.shared.fetchProfileImageURL(username: username) { _ in }
 					DispatchQueue.main.async {
 						self.switchToTabBarController()
 					}
@@ -136,7 +141,6 @@ extension SplashViewController {
 
 
 // MARK: - Layout
-
 extension SplashViewController {
 	private func layoutComponents() {
 		view.backgroundColor = .asset(.Black)

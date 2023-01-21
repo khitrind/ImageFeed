@@ -16,30 +16,23 @@ final class ProfileService {
 
 	private init() {}
 
-	func fetchProfile(_ token: String, completion: @escaping (Result<String, Error>) -> Void) {
+	func fetchProfile(completion: @escaping (Result<String, Error>) -> Void) {
 		task?.cancel()
 
-		if let request = buildRequest(authToken: token) {
-			task = networkClient.fetch(requestType: .urlRequest(urlRequest: request)) { [weak self] (result: Result<Profile, Error>) in
-				guard let self = self else { return }
-				switch result {
-					case .success(let profile):
-						self.profile = profile
-						completion(.success(profile.username))
-					case .failure(let error):
-						completion(.failure(error))
-						print(error)
-				}
+		guard let url = URL(string: profileURL) else {
+			fatalError("Unable to build profile URL")
+		}
+
+		task = networkClient.fetch(requestType: .url(url: url)) { [weak self] (result: Result<Profile, Error>) in
+			guard let self = self else { return }
+			switch result {
+				case .success(let profile):
+					self.profile = profile
+					completion(.success(profile.username))
+				case .failure(let error):
+					completion(.failure(error))
+					print(error)
 			}
 		}
-	}
-
-	private func buildRequest(authToken token: String) -> URLRequest? {
-		if let urlComponents = URLComponents(string: profileURL) {
-			var request = URLRequest(url: urlComponents.url!)
-			request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-			return request
-		}
-		return nil
 	}
 }

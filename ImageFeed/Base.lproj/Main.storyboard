@@ -18,7 +18,7 @@
         <!--Auth View Controller-->
         <scene sceneID="foh-xB-GlX">
             <objects>
-                <viewController id="dds-zY-Vud" customClass="AuthViewController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AuthViewController" id="dds-zY-Vud" customClass="AuthViewController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="JpV-Rj-ogv">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -174,7 +174,7 @@
                     <navigationItem key="navigationItem" id="StL-Rj-r6E"/>
                     <connections>
                         <outlet property="tableView" destination="dp2-fv-U9H" id="Po3-Pp-G95"/>
-                        <segue destination="eRP-tQ-d1R" kind="presentation" identifier="ShowSingleImageView" id="QPF-Gh-Ghx"/>
+                        <segue destination="eRP-tQ-d1R" kind="presentation" identifier="ShowSingleImageView" modalTransitionStyle="coverVertical" id="QPF-Gh-Ghx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

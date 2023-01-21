@@ -26,7 +26,7 @@ class ImagesListViewController: UIViewController {
 		if segue.identifier == singleViewIdentifier {
 			let viewController = segue.destination as! SingleImageViewController
 			let indexPath = sender as! IndexPath
-			viewController.image = photos[indexPath.row].thumbImageURL
+			viewController.image = photos[indexPath.row].largeImageURL
 		} else {
 			super.prepare(for: segue, sender: sender)
 		}
@@ -118,3 +118,4 @@ extension ImagesListViewController: ImagesListCellDelegate {
 		}
 	}
 }
+

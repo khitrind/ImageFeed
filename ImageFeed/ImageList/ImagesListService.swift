@@ -17,16 +17,6 @@ final class ImageListService {
 
 
 	private var lastLoadedPage: Int = 0
-
-	private func buildRequest(url: URL) -> URLRequest? {
-		guard let token = OAuth2TokenStorage().token else { return nil }
-		var request = URLRequest(url: url)
-		request.setValue(
-			"Bearer \(token)",
-			forHTTPHeaderField: "Authorization"
-		)
-		return request
-	}
 }
 
 
@@ -34,20 +24,20 @@ final class ImageListService {
 extension ImageListService {
 	func fetchPhotosNextPage() {
 		if task != nil { return }
-		guard let url = getNextPhotosURL() else { return }
+		guard let url = getNextPhotosURL() else {
+			fatalError("Unable to build next photo URL")
+		}
 
-		if let request = buildRequest(url: url) {
-			task = networkClient.fetch(requestType: .urlRequest(urlRequest: request)) { [weak self] (result: Result<[PhotoResult], Error>) in
-				guard let self = self else { return }
-				switch result {
-					case .success(let photos):
-						self.updateLastLoadPage()
-						self.preparePhotoResult(data: photos)
-					case .failure(let error):
-						print(error)
-				}
-				self.task = nil
+		task = networkClient.fetch(requestType: .url(url: url)) { [weak self] (result: Result<[PhotoResult], Error>) in
+			guard let self = self else { return }
+			switch result {
+				case .success(let photos):
+					self.updateLastLoadPage()
+					self.preparePhotoResult(data: photos)
+				case .failure(let error):
+					print(error)
 			}
+			self.task = nil
 		}
 	}
 
@@ -87,11 +77,13 @@ extension ImageListService {
 	func changeLike(photoId: String, isLiked: Bool, photoIdx: Int, _ completion: @escaping (Result<Photo, Error>) -> Void) {
 		if task != nil { return }
 
-		guard let url = URL(string: "\(baseUrl)/photos/\(photoId)/like"), var request = buildRequest(url: url) else {
+		guard let url = URL(string: "\(photoUrl)/\(photoId)/like") else {
 			fatalError("Empty url")
 		}
 
+		var request = URLRequest(url: url)
 		request.httpMethod = isLiked ? "POST" : "DELETE"
+
 		task = networkClient.fetch(requestType: .urlRequest(urlRequest: request)) { [weak self] (result: Result<PhotoResult, Error>) in
 			guard let self = self else { return }
 			switch result {
