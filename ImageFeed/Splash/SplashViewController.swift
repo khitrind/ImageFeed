@@ -10,6 +10,7 @@ import UIKit
 final class SplashViewController: UIViewController {
 	private let profileService = ProfileService.shared
 	private let profileImageService = ProfileImageService.shared
+	private var isAuthorized: Bool = false
 
 	private let oAuth2Service = OAuth2Service()
 	private var oAuth2TokenStorage: OAuth2TokenStorageProtocol = OAuth2TokenStorage()
@@ -43,10 +44,13 @@ final class SplashViewController: UIViewController {
 		let tabBarController = UIStoryboard(name: "Main", bundle: .main)
 			.instantiateViewController(withIdentifier: "TabBarViewController")
 		window.rootViewController = tabBarController
-		window.makeKeyAndVisible()
 	}
 
 	private func checkAuth() {
+		guard isAuthorized == false else  {
+			return
+		}
+
 		if oAuth2TokenStorage.token != nil {
 			UIBlockingProgressHUD.show()
 			fetchProfile()
@@ -67,6 +71,7 @@ final class SplashViewController: UIViewController {
 // MARK: - AuthViewControllerDelegate
 extension SplashViewController: AuthViewControllerDelegate {
 	func authViewController(_ vc: AuthViewController, didAuthenticateWithCode code: String) {
+		isAuthorized = true
 		dismiss(animated: true) { [weak self] in
 			guard let self = self else { return }
 			UIBlockingProgressHUD.show()
