@@ -86,11 +86,6 @@ extension SingleImageViewController: UIScrollViewDelegate {
 		let imageSize = image.size
 
 		var realImgSize: CGSize;
-
-		print(imageSize)
-		print(imgViewSize)
-
-		// Считаем реальные размеры картинки
 		if imageSize.width / imageSize.height > imgViewSize.width / imgViewSize.height {
 			realImgSize = CGSizeMake(imgViewSize.width, imgViewSize.width / imageSize.width * imageSize.height);
 		}
@@ -100,12 +95,9 @@ extension SingleImageViewController: UIScrollViewDelegate {
 
 		var fr = CGRectMake(0, 0, 0, 0);
 		fr.size = realImgSize;
-		// Выставляем для вьюхи реальные размеры
 		singleImage.frame = fr;
 
 		let scrollViewSize = scrollView.frame.size;
-
-		// Считаем и выставляем офсеты со всех сторон что бы отцентровать картинку в scrollView
 		let offx = (scrollViewSize.width > realImgSize.width ? (scrollViewSize.width - realImgSize.width) / 2 : 0);
 		let offy = (scrollViewSize.height > realImgSize.height ? (scrollViewSize.height - realImgSize.height) / 2 : 0);
 

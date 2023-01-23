@@ -29,9 +29,7 @@ final class ProfileImageService {
 			guard let self = self else { return }
 			switch result {
 				case .success(let userProfile):
-					print(userProfile)
 					if let image = userProfile.profileImage?.image {
-						print(image)
 						self.avatarURL = image
 						NotificationCenter.default
 							.post(
@@ -44,7 +42,6 @@ final class ProfileImageService {
 
 				case .failure(let error):
 					completion(.failure(error))
-					print(error)
 			}
 
 		}

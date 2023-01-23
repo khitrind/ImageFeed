@@ -11,6 +11,7 @@ final class SplashViewController: UIViewController {
 	private let profileService = ProfileService.shared
 	private let profileImageService = ProfileImageService.shared
 	private var isAuthorized: Bool = false
+	private var maxRetryCount: Int = 5
 
 	private let oAuth2Service = OAuth2Service()
 	private var oAuth2TokenStorage: OAuth2TokenStorageProtocol = OAuth2TokenStorage()
@@ -132,13 +133,18 @@ extension SplashViewController {
 	private func showError() {
 		DispatchQueue.main.async { [weak self] in
 			guard let self = self else {return }
+			let isRetryLimit =  self.maxRetryCount >= 5;
+			let message = isRetryLimit ? "Все сломалось" : "Попробовать еще?"
+			let actionTitle = isRetryLimit ? "ОК" : "Да"
 			self.errorAlertController
 				.displayAlert(
 					over: self,
 					title: "Error!",
 					message: "Something went wrong",
-					actionTitle: "OK") {
-						self.checkAuth()
+					actionTitle: actionTitle) {
+						if !isRetryLimit {
+							self.checkAuth()
+						}
 					}
 		}
 	}

@@ -23,17 +23,10 @@ final class ImagesListCell: UITableViewCell {
 		delegate?.imageListCellDidTapLike(self)
 	}
 
-	private lazy var dateFormatter: DateFormatter = {
-		let formatter = DateFormatter()
-		formatter.dateStyle = .long
-		formatter.timeStyle = .none
-		return formatter
-	}()
-
-	public func configure(from photo: Photo, for row: Int) {
+	public func configure(from photo: Photo) {
 		cellImage.kf.indicatorType = .activity
 		cellImage.kf.setImage(with: photo.thumbImageURL)
-		dateLabel.text = dateFormatter.string(from: Date())
+		dateLabel.text = DateFormatter().displayFormat.string(from: photo.createdAt)
 		setIsLiked(isLiked: photo.isLiked)
 	}
 

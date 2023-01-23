@@ -15,8 +15,28 @@ final class ImageListService {
 	private var task: URLSessionTask?
 	private let networkClient = NetworkRouting()
 
+	private let dateFormatter: DateFormatter = {
+		let formatter = DateFormatter()
+		formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+		return formatter
+	}()
+
+
+
 
 	private var lastLoadedPage: Int = 0
+
+	private func parsePhotoResult(from result: PhotoResult) -> Photo {
+		Photo(
+			id: result.id,
+			size: CGSize(width: result.width, height: result.height),
+			createdAt: dateFormatter.date(from: result.createdAt) ?? Date(),
+			welcomeDescription: result.description,
+			thumbImageURL: result.urls.thumb,
+			largeImageURL: result.urls.full,
+			isLiked: result.isLiked
+		)
+	}
 }
 
 
@@ -56,8 +76,11 @@ extension ImageListService {
 	}
 
 	private func preparePhotoResult(data: [PhotoResult]) {
-		self.photos.append(contentsOf: data.map {item in Photo.fromPhotoResult(from: item)})
-		print(self.photos)
+		DispatchQueue.main.async { [weak self] in
+			guard let self = self else { return }
+			self.photos.append(contentsOf: data.map {item in self.parsePhotoResult(from: item)})
+		}
+
 
 		NotificationCenter.default
 			.post(
@@ -89,7 +112,7 @@ extension ImageListService {
 			switch result {
 				case .success(let photoResult):
 					self.photos[photoIdx].isLiked = isLiked
-					completion(.success(Photo.fromPhotoResult(from: photoResult)))
+					completion(.success(self.parsePhotoResult(from: photoResult)))
 				case .failure(let error):
 					completion(.failure(error))
 

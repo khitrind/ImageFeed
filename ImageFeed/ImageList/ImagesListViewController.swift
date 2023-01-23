@@ -46,7 +46,7 @@ extension ImagesListViewController: UITableViewDataSource {
 		}
 		imageListCell.delegate = self
 
-		imageListCell.configure(from: photos[indexPath.row], for: indexPath.row)
+		imageListCell.configure(from: photos[indexPath.row])
 		return imageListCell
 	}
 
@@ -82,7 +82,6 @@ extension ImagesListViewController {
 		let oldCount = photos.count
 		let newCount = imageListService.photos.count
 		photos = imageListService.photos
-		print(photos)
 		if oldCount != newCount {
 			tableView.performBatchUpdates {
 				let indexPaths = (oldCount..<newCount).map { i in
