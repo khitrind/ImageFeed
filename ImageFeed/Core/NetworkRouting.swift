@@ -81,7 +81,6 @@ final class NetworkRouting: NetworkClient {
 			   response.statusCode < 200 || response.statusCode >= 300 {
 				handler(.failure(NetworkError.codeError))
 				return
-
 			}
 			guard let data = data else {
 				handler(.failure(NetworkError.emptyData))

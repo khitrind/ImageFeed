@@ -29,3 +29,8 @@ struct PhotoResult: Decodable  {
 		case createdAt = "created_at"
 	}
 }
+
+
+struct LikePhotoResult: Decodable {
+	let photo: PhotoResult
+}

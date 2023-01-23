@@ -97,7 +97,7 @@ extension ImageListService {
 
 //MARK: - LikesService
 extension ImageListService {
-	func changeLike(photoId: String, isLiked: Bool, photoIdx: Int, _ completion: @escaping (Result<Photo, Error>) -> Void) {
+	func changeLike(photoId: String, shouldLike: Bool, photoIdx: Int, _ completion: @escaping (Result<Photo, Error>) -> Void) {
 		if task != nil { return }
 
 		guard let url = URL(string: "\(photoUrl)/\(photoId)/like") else {
@@ -105,14 +105,14 @@ extension ImageListService {
 		}
 
 		var request = URLRequest(url: url)
-		request.httpMethod = isLiked ? "POST" : "DELETE"
+		request.httpMethod = shouldLike ? "POST" : "DELETE"
 
-		task = networkClient.fetch(requestType: .urlRequest(urlRequest: request)) { [weak self] (result: Result<PhotoResult, Error>) in
+		task = networkClient.fetch(requestType: .urlRequest(urlRequest: request)) { [weak self] (result: Result<LikePhotoResult, Error>) in
 			guard let self = self else { return }
 			switch result {
-				case .success(let photoResult):
-					self.photos[photoIdx].isLiked = isLiked
-					completion(.success(self.parsePhotoResult(from: photoResult)))
+				case .success(let likePhotoResult):
+					self.photos[photoIdx].isLiked = likePhotoResult.photo.isLiked
+					completion(.success(self.parsePhotoResult(from: likePhotoResult.photo)))
 				case .failure(let error):
 					completion(.failure(error))
 
