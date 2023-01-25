@@ -30,7 +30,7 @@ final class SplashViewController: UIViewController {
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		layoutComponents()
+		configureViewComponents()
 	}
 
 	override func viewDidAppear(_ animated: Bool) {
@@ -53,7 +53,6 @@ final class SplashViewController: UIViewController {
 		}
 
 		if oAuth2TokenStorage.token != nil {
-			UIBlockingProgressHUD.show()
 			fetchProfile()
 		} else {
 			let storyboard = UIStoryboard(name: "Main", bundle: .main)
@@ -95,6 +94,7 @@ extension SplashViewController: AuthViewControllerDelegate {
 	}
 
 	private func fetchProfile() {
+		UIBlockingProgressHUD.show()
 		profileService?.fetchProfile { [weak self] result in
 			guard let self = self else { return }
 			switch result {
@@ -134,14 +134,12 @@ extension SplashViewController {
 		DispatchQueue.main.async { [weak self] in
 			guard let self = self else {return }
 			let isRetryLimit =  self.maxRetryCount >= 5;
-			let message = isRetryLimit ? "Все сломалось" : "Попробовать еще?"
-			let actionTitle = isRetryLimit ? "ОК" : "Да"
 			self.errorAlertController
 				.displayAlert(
 					over: self,
 					title: "Error!",
-					message: "Something went wrong",
-					actionTitle: actionTitle) {
+					message: isRetryLimit ? "Все сломалось" : "Попробовать еще?",
+					actionTitle: isRetryLimit ? "ОК" : "Да") {
 						if !isRetryLimit {
 							self.checkAuth()
 						}
@@ -153,7 +151,7 @@ extension SplashViewController {
 
 // MARK: - Layout
 extension SplashViewController {
-	private func layoutComponents() {
+	private func configureViewComponents() {
 		view.backgroundColor = .asset(.Black)
 		practicumLogoView.translatesAutoresizingMaskIntoConstraints = false
 

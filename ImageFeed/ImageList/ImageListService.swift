@@ -93,8 +93,16 @@ extension ImageListService {
 
 //MARK: - LikesService
 extension ImageListService {
+	enum LikeServiceError: Error {
+	  case raceCondition
+	}
+
 	func changeLike(photoId: String, shouldLike: Bool, photoIdx: Int, _ completion: @escaping (Result<Photo, Error>) -> Void) {
-		if task != nil { return }
+		if task != nil {
+			// Just to log cases like this
+			completion(.failure(LikeServiceError.raceCondition))
+			return
+		}
 
 		guard let url = URL(string: "\(photoUrl)/\(photoId)/like") else {
 			fatalError("Empty url")

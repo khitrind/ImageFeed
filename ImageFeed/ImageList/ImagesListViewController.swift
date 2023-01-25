@@ -11,7 +11,7 @@ class ImagesListViewController: UIViewController {
 	private let singleViewIdentifier = "ShowSingleImageView"
 	private let imageListService = ImageListService.shared
 	private var imageListServiceObserver: NSObjectProtocol?
-	var photos: [Photo] = []
+	private var photos: [Photo] = []
 
 	@IBOutlet private var tableView: UITableView!
 
@@ -103,8 +103,10 @@ extension ImagesListViewController: ImagesListCellDelegate {
 		let photo = photos[indexPath.row]
 		UIBlockingProgressHUD.show()
 		
-		imageListService.changeLike(photoId: photo.id, shouldLike: !photo.isLiked, photoIdx: indexPath.row) { [weak cell, self] response in
-			guard let cell = cell else { return }
+		imageListService.changeLike(photoId: photo.id, shouldLike: !photo.isLiked, photoIdx: indexPath.row) { [weak cell, weak self] response in
+			guard let cell = cell,
+				  let self = self
+			else { return }
 
 			switch response {
 			case .success(let photoResult):
