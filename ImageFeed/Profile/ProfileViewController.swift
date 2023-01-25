@@ -9,7 +9,7 @@ import UIKit
 import Kingfisher
 
 final class ProfileViewController: UIViewController {
-	private let profileService = ProfileService.shared
+	private weak var profileService = ProfileService.shared
 	private var profileImageServiceObserver: NSObjectProtocol?
 
 	private let userProfileImage: UIImageView = {
@@ -61,7 +61,7 @@ final class ProfileViewController: UIViewController {
 		layoutComponents()
 		prepareAction()
 		observeAvatarChanges()
-		updateProfileDetails(profile: profileService.profile)
+		updateProfileDetails(profile: profileService?.profile)
 	}
 }
 

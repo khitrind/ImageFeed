@@ -8,8 +8,8 @@
 import UIKit
 
 final class SplashViewController: UIViewController {
-	private let profileService = ProfileService.shared
-	private let profileImageService = ProfileImageService.shared
+	private weak var profileService = ProfileService.shared
+	private weak var profileImageService = ProfileImageService.shared
 	private var isAuthorized: Bool = false
 	private var maxRetryCount: Int = 5
 
@@ -95,7 +95,7 @@ extension SplashViewController: AuthViewControllerDelegate {
 	}
 
 	private func fetchProfile() {
-		profileService.fetchProfile { [weak self] result in
+		profileService?.fetchProfile { [weak self] result in
 			guard let self = self else { return }
 			switch result {
 				case .success(let username):
