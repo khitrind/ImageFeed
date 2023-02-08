@@ -8,14 +8,30 @@
 import UIKit
 
 final class SplashViewController: UIViewController {
-	private let profileService = ProfileService.shared
-	private let profileImageService = ProfileImageService.shared
+	private weak var profileService = ProfileService.shared
+	private weak var profileImageService = ProfileImageService.shared
+	private var isAuthorized: Bool = false
+	private var maxRetryCount: Int = 5
 
 	private let oAuth2Service = OAuth2Service()
 	private var oAuth2TokenStorage: OAuth2TokenStorageProtocol = OAuth2TokenStorage()
 	private let errorAlertController = ErrorAlertViewController()
 
 	private let showAuthIdentifier = "ShowAuthIdentifier"
+
+	private let practicumLogoView: UIImageView = {
+		let imageView = UIImageView()
+		imageView.image = .asset(.splashScreenLogo)
+		imageView.tintColor = .asset(.ypWhite)
+		imageView.contentMode = .scaleAspectFit
+
+		return imageView
+	}()
+
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		configureViewComponents()
+	}
 
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
@@ -32,10 +48,22 @@ final class SplashViewController: UIViewController {
 	}
 
 	private func checkAuth() {
-		if let token = oAuth2TokenStorage.token {
-			fetchProfile(token: token)
+		guard isAuthorized == false else  {
+			return
+		}
+
+		if oAuth2TokenStorage.token != nil {
+			fetchProfile()
 		} else {
-			performSegue(withIdentifier: showAuthIdentifier, sender: nil)
+			let storyboard = UIStoryboard(name: "Main", bundle: .main)
+			guard let authViewController = storyboard.instantiateViewController(
+				withIdentifier: "AuthViewController"
+			) as? AuthViewController else {
+				return
+			}
+			authViewController.delegate = self
+			authViewController.modalPresentationStyle = .fullScreen
+			present(authViewController, animated: true)
 		}
 	}
 }
@@ -43,6 +71,7 @@ final class SplashViewController: UIViewController {
 // MARK: - AuthViewControllerDelegate
 extension SplashViewController: AuthViewControllerDelegate {
 	func authViewController(_ vc: AuthViewController, didAuthenticateWithCode code: String) {
+		isAuthorized = true
 		dismiss(animated: true) { [weak self] in
 			guard let self = self else { return }
 			UIBlockingProgressHUD.show()
@@ -51,12 +80,12 @@ extension SplashViewController: AuthViewControllerDelegate {
 	}
 
 	private func fetchOAuthToken(_ code: String) {
-		oAuth2Service.fetchAuthToken(code) { [weak self] result in
+		oAuth2Service.fetchAuthToken(code) {  [weak self] result in
 			guard let self = self else { return }
 			switch result {
 			case .success(let token):
 					self.oAuth2TokenStorage.token = token
-					self.fetchProfile(token: token)
+					self.fetchProfile()
 			case .failure:
 					UIBlockingProgressHUD.dismiss()
 					self.showError()
@@ -64,12 +93,13 @@ extension SplashViewController: AuthViewControllerDelegate {
 		}
 	}
 
-	private func fetchProfile(token: String) {
-		profileService.fetchProfile(token) { [weak self] result in
+	private func fetchProfile() {
+		UIBlockingProgressHUD.show()
+		profileService?.fetchProfile { [weak self] result in
 			guard let self = self else { return }
 			switch result {
 				case .success(let username):
-					ProfileImageService.shared.fetchProfileImageURL(username: username, token: token) { _ in }
+					ProfileImageService.shared.fetchProfileImageURL(username: username) { _ in }
 					DispatchQueue.main.async {
 						self.switchToTabBarController()
 					}
@@ -103,14 +133,39 @@ extension SplashViewController {
 	private func showError() {
 		DispatchQueue.main.async { [weak self] in
 			guard let self = self else {return }
+			let isRetryLimit =  self.maxRetryCount >= 5;
 			self.errorAlertController
 				.displayAlert(
 					over: self,
 					title: "Error!",
-					message: "Something went wrong",
-					actionTitle: "OK") {
-						self.checkAuth()
+					message: isRetryLimit ? "Все сломалось" : "Попробовать еще?",
+					actionTitle: isRetryLimit ? "ОК" : "Да") {
+						if !isRetryLimit {
+							self.checkAuth()
+						}
 					}
 		}
+	}
+}
+
+
+// MARK: - Layout
+extension SplashViewController {
+	private func configureViewComponents() {
+		view.backgroundColor = .asset(.Black)
+		practicumLogoView.translatesAutoresizingMaskIntoConstraints = false
+
+		view.addSubview(practicumLogoView)
+
+		NSLayoutConstraint.activate([
+			practicumLogoView.centerXAnchor.constraint(
+				equalTo: view.centerXAnchor),
+			practicumLogoView.centerYAnchor.constraint(
+				equalTo: view.centerYAnchor),
+			practicumLogoView.widthAnchor.constraint(
+				equalTo: view.widthAnchor, multiplier: 0.2),
+			practicumLogoView.heightAnchor.constraint(
+				equalTo: practicumLogoView.widthAnchor)
+		])
 	}
 }

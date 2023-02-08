@@ -19,7 +19,7 @@ final class OAuth2Service {
 		task?.cancel()
 		lastCode = code
 
-		task = networkClient.fetch(requestType: .urlRequest(urlRequest: request)) {[weak self] (response: Result<OAuthTokenResponseBody, Error>) in
+		task = networkClient.fetch(requestType: .urlRequest(urlRequest: request), withToken: false) {[weak self] (response: Result<OAuthTokenResponseBody, Error>) in
 			guard let self = self else {return}
 			self.task = nil
 
@@ -34,12 +34,12 @@ final class OAuth2Service {
 	}
 
 	private func buildRequest(code: String) -> URLRequest? {
-		if var urlComponents = URLComponents(string: TokenURL) {
+		if var urlComponents = URLComponents(string: tokenURL) {
 			urlComponents.queryItems = [
-			   URLQueryItem(name: "client_id", value: AccessKey),
-			   URLQueryItem(name: "redirect_uri", value: RedirectURI),
+			   URLQueryItem(name: "client_id", value: accessKey),
+			   URLQueryItem(name: "redirect_uri", value: redirectURI),
 			   URLQueryItem(name: "code", value: code),
-			   URLQueryItem(name: "client_secret", value: SecretKey),
+			   URLQueryItem(name: "client_secret", value: secretKey),
 			   URLQueryItem(name: "grant_type", value: "authorization_code")
 			 ]
 			var request = URLRequest(url: urlComponents.url!)

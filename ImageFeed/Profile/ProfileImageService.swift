@@ -18,45 +18,32 @@ final class ProfileImageService {
 
 	private init() {}
 
-	func fetchProfileImageURL(username: String, token: String?, _ completion: @escaping (Result<Void, Error>) -> Void) {
+	func fetchProfileImageURL(username: String, _ completion: @escaping (Result<Void, Error>) -> Void) {
 		task?.cancel()
 
-		if let request = buildRequest(username: username, token: token) {
-			task = networkClient.fetch(requestType: .urlRequest(urlRequest: request)) { [weak self] (result: Result<UserProfile, Error>) in
-				guard let self = self else { return }
-				switch result {
-					case .success(let userProfile):
-						print(userProfile)
-						if let image = userProfile.profileImage?.image {
-							print(image)
-							self.avatarURL = image
-							NotificationCenter.default
-								.post(
-									name: ProfileImageService.DidChangeNotification,
-									object: self,
-									userInfo: ["URL": image]
-								)
-						}
-						completion(.success(()))
-						
-					case .failure(let error):
-						completion(.failure(error))
-						print(error)
-				}
-				
-			}
+		guard let url = URL(string: "\(profileImageURL)/\(username)") else {
+			fatalError("Enable to build profile URL")
 		}
-	}
 
-	private func buildRequest(username: String, token: String?) -> URLRequest? {
-		if let urlComponents = URLComponents(string: "\(ProfileImageURL)/\(username)") {
-			var request = URLRequest(url: urlComponents.url!)
-			if let token = token {
-				request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+		task = networkClient.fetch(requestType: .url(url: url)) { [weak self] (result: Result<UserProfile, Error>) in
+			guard let self = self else { return }
+			switch result {
+				case .success(let userProfile):
+					if let image = userProfile.profileImage?.image {
+						self.avatarURL = image
+						NotificationCenter.default
+							.post(
+								name: ProfileImageService.DidChangeNotification,
+								object: self,
+								userInfo: ["URL": image]
+							)
+					}
+					completion(.success(()))
+
+				case .failure(let error):
+					completion(.failure(error))
 			}
 
-			return request
 		}
-		return nil
 	}
 }

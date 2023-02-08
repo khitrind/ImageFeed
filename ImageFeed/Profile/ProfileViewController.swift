@@ -9,7 +9,7 @@ import UIKit
 import Kingfisher
 
 final class ProfileViewController: UIViewController {
-	private let profileService = ProfileService.shared
+	private weak var profileService = ProfileService.shared
 	private var profileImageServiceObserver: NSObjectProtocol?
 
 	private let userProfileImage: UIImageView = {
@@ -33,7 +33,6 @@ final class ProfileViewController: UIViewController {
 	private let profileNameLabel: UILabel = {
 		let label = UILabel()
 
-		label.text = "Екатерина новикова"
 		label.textColor = UIColor.asset(ColorAsset.ypWhite)
 		label.font =  UIFont.asset(FontAsset.ysDisplayRegular, size: 23)
 		return label
@@ -42,7 +41,6 @@ final class ProfileViewController: UIViewController {
 	private let loginNameLabel: UILabel = {
 		let label = UILabel()
 
-		label.text = "@ekaterina_nov"
 		label.textColor = UIColor.asset(ColorAsset.ypGray)
 		label.font = UIFont.asset(FontAsset.ysDisplayRegular, size: 13)
 		return label
@@ -51,7 +49,6 @@ final class ProfileViewController: UIViewController {
 	private let descriptionLabel: UILabel = {
 		let label = UILabel()
 
-		label.text = "Hello World"
 		label.textColor = UIColor.asset(ColorAsset.ypWhite)
 		label.font = UIFont.asset(FontAsset.ysDisplayRegular, size: 13)
 		return label
@@ -62,8 +59,9 @@ final class ProfileViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		layoutComponents()
+		prepareAction()
 		observeAvatarChanges()
-		updateProfileDetails(profile: profileService.profile)
+		updateProfileDetails(profile: profileService?.profile)
 	}
 }
 
@@ -89,13 +87,65 @@ extension ProfileViewController {
 			 let url = URL(string: profileImageURL)
 		 else { return }
 
-		userProfileImage.kf.setImage(with: url,
-									 placeholder: UIImage(named: "stub"),
-									 options: [
-										.transition(.fade(1)),
-										.cacheOriginalImage
-									 ])
+		userProfileImage
+			.kf.setImage(with: url,
+						 placeholder: UIImage(named: "stub"),
+						 options: [
+							.transition(.fade(1)),
+							.cacheOriginalImage
+						 ])
 	 }
+}
+
+//MARK: - LogoutAction
+extension ProfileViewController {
+	private func prepareAction() {
+		logoutButton.addTarget(
+			self,
+			action: #selector(logoutPressed),
+			for: .touchUpInside
+		)
+	}
+
+	@objc private func logoutPressed() {
+		showLogoutAlert()
+	}
+
+	private func onLogout() {
+		OAuth2TokenStorage().clearToken()
+		WebViewViewController.clean()
+		tabBarController?.dismiss(animated: true)
+		guard let window = UIApplication.shared.windows.first else { fatalError("Invalid Configuration") }
+		window.rootViewController = SplashViewController()
+	}
+
+	private func showLogoutAlert() {
+		let alert = UIAlertController(
+			title: "Пока, Пока!",
+			message: "Уверены что хотите выйти?",
+			preferredStyle: .alert
+		)
+
+		let agreeAction = UIAlertAction(
+			title: "Да",
+			style: .default
+		) { [weak self] _ in
+			guard let self = self else { return }
+			DispatchQueue.main.async {
+				self.onLogout()
+			}
+		}
+
+		let dismissAction = UIAlertAction(
+			title: "Нет",
+			style: .default
+		)
+
+		alert.addAction(agreeAction)
+		alert.addAction(dismissAction)
+
+		present(alert, animated: true)
+	}
 }
 
 
